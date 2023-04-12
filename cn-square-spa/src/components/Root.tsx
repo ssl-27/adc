@@ -3,14 +3,14 @@ import { CNAppBar } from "./CNAppBar";
 import { Toolbar } from "@mui/material";
 
 function Root() {
-    return (
-        <>
-            <CNAppBar/>
-            <Toolbar/>
-            <main>
-                <Outlet/>
-            </main>
-        </>
-    );
+  return (
+    <>
+      <CNAppBar />
+      <Toolbar />
+      <main>
+        <Outlet />
+      </main>
+    </>
+  );
 }
 export default Root;
