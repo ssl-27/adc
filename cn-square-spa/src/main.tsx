@@ -5,9 +5,10 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Root from "./components/Root";
 import CNShop from "./components/CNShop";
 import MyCart from "./components/MyCart";
-import Login from "./components/Login";
 import ProductDetail from "./components/ProductDetail";
 import cnAxios from "./utils/cn-axios";
+import LogIn from "./components/LogIn";
+import SignUp from "./components/SignUp";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,11 @@ const router = createBrowserRouter([
       },
       {
         path: "login",
-        element: <Login />,
+        element: <LogIn />,
+      },
+      {
+        path: "signup",
+        element: <SignUp />,
       },
       {
         path: "cart",
