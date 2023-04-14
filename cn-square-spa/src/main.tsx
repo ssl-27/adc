@@ -7,6 +7,7 @@ import CNShop from "./components/CNShop";
 import MyCart from "./components/MyCart";
 import Login from "./components/Login";
 import ProductDetail from "./components/ProductDetail";
+import cnAxios from "./utils/cn-axios";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: "shop",
         element: <CNShop />,
+        loader: async () => {
+          const response = await cnAxios.get("/products");
+          return response.data;
+        },
       },
       {
         path: "login",
@@ -28,6 +33,13 @@ const router = createBrowserRouter([
       {
         path: "product/:id",
         element: <ProductDetail />,
+        loader: async ({ params }) => {
+          const productResponse = await cnAxios.get(`/products/${params.id}`);
+          const reviewResponse = await cnAxios.get(
+            `/products/${params.id}/comments`
+          );
+          return [productResponse.data, reviewResponse.data];
+        },
       },
     ],
   },

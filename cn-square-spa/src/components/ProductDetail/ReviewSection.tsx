@@ -8,9 +8,17 @@ import {
   Typography,
 } from "@mui/material";
 import Review from "./Review";
-function ReviewSection() {
+function ReviewSection(props) {
+  const { reviews } = props;
+  const reviewsComponents = reviews.map((v) => (
+    <Review
+      key={v.userId}
+      userId={v.userId}
+      message={v.message}
+      rating={v.rating}
+    ></Review>
+  ));
   // TODO: fetch all comments
-  const reviews = [<Review></Review>, <Review></Review>, <Review></Review>];
   return (
     <Card>
       <CardContent
@@ -32,7 +40,7 @@ function ReviewSection() {
             <Button>Submit</Button>
           </ButtonGroup>
         </FormControl>
-        {reviews}
+        {reviewsComponents}
       </CardContent>
     </Card>
   );

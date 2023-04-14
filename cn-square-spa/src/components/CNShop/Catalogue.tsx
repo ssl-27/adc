@@ -1,7 +1,18 @@
 import { Box, Pagination } from "@mui/material";
 import ProductCard from "./ProductCard";
 
-function Catalogue() {
+function Catalogue(props) {
+  const { info } = props;
+  const productCards = info.map((v) => {
+    return (
+      <ProductCard
+        key={v.id}
+        id={v.id}
+        name={v.name}
+        price={v.price}
+      ></ProductCard>
+    );
+  });
   return (
     <Box>
       <Box
@@ -13,26 +24,7 @@ function Catalogue() {
           justifyContent: "flex-start",
         }}
       >
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
+        {productCards}
       </Box>
       <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
         <Pagination count={10} color="primary"></Pagination>

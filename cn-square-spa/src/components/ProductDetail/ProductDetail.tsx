@@ -1,9 +1,10 @@
 import { Card, CardContent, Container, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import ProductInfo from "./ProductInfo";
 import ReviewSection from "./ReviewSection";
 
 function ProductDetail() {
+  const [productData, reviewData] = useLoaderData() as [Product, Comment[]];
   return (
     <Container>
       <Typography>
@@ -20,8 +21,8 @@ function ProductDetail() {
             gap: "5px",
           }}
         >
-          <ProductInfo />
-          <ReviewSection />
+          <ProductInfo info={productData} />
+          <ReviewSection reviews={reviewData} />
         </CardContent>
       </Card>
     </Container>

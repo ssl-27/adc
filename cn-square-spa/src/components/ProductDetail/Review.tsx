@@ -1,18 +1,28 @@
-import { Box, Typography } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
+import cnAxios from "../../utils/cn-axios";
+import { useEffect, useState } from "react";
 
-function Review() {
-  return (
-    <Box>
-      <Typography>XXX</Typography>
-      <Typography>
-        Lorem ipsum dolor sit amet. Et architecto reprehenderit sit internos
-        laborum et sapiente voluptatibus et maxime asperiores ut voluptatem
-        fuga. Quo sunt harum ut laboriosam laborum est cupiditate accusantium ut
-        dolores dolores. Sit voluptas ipsum sed similique quam quo consectetur
-        corrupti et esse possimus! Est assumenda tempore est inventore suscipit
-        At dolor voluptatibus.
-      </Typography>
-    </Box>
-  );
+function Review(props) {
+  const { userId, message, rating } = props;
+  const [userData, setUserData] = useState(undefined);
+  useEffect(() => {
+    const response = cnAxios.get(`/users/${userId}`);
+    response.then((res) => {
+      setUserData(res.data);
+    });
+  }, []);
+  if (userData) {
+    const { userName, avatar } = userData;
+    return (
+      <Box>
+        <Avatar src={avatar} />
+        <Typography>{userName}</Typography>
+        <Typography>{message}</Typography>
+        <Typography>{`rating=${rating}`}</Typography>
+      </Box>
+    );
+  } else {
+    return <Typography>Loading</Typography>;
+  }
 }
 export default Review;
