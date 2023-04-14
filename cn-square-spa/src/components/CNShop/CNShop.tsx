@@ -6,7 +6,7 @@ function CNShop() {
   return (
     <Container maxWidth="xl">
       <Typography>Shop</Typography>
-      <Box sx={{ display: "flex", alignItems: "flex-start" }}>
+      <Box sx={{ display: "flex", alignItems: "flex-start", gap: "30px" }}>
         <ProductFilter></ProductFilter>
         <Catalogue></Catalogue>
       </Box>

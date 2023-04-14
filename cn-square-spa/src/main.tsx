@@ -6,6 +6,7 @@ import Root from "./components/Root";
 import CNShop from "./components/CNShop";
 import MyCart from "./components/MyCart";
 import Login from "./components/Login";
+import ProductDetail from "./components/ProductDetail";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <MyCart />,
+      },
+      {
+        path: "product/:id",
+        element: <ProductDetail />,
       },
     ],
   },

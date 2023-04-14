@@ -1,16 +1,16 @@
-import { Box, Container, Pagination } from "@mui/material";
+import { Box, Pagination } from "@mui/material";
 import ProductCard from "./ProductCard";
 
 function Catalogue() {
   return (
-    <Container>
+    <Box>
       <Box
         sx={{
           display: "flex",
           flexDirection: "row",
           flexWrap: "wrap",
           gap: "20px",
-          justifyContent: "center",
+          justifyContent: "flex-start",
         }}
       >
         <ProductCard></ProductCard>
@@ -37,7 +37,7 @@ function Catalogue() {
       <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
         <Pagination count={10} color="primary"></Pagination>
       </Box>
-    </Container>
+    </Box>
   );
 }
 
