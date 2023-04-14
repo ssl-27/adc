@@ -3,6 +3,7 @@ type Product = {
 
   name: string;
   description: string;
+  imageUrl: string;
 
   type: string;
   brand: string;

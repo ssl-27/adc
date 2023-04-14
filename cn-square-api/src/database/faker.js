@@ -80,6 +80,7 @@ exports.createProduct = (id) => {
 
     name: faker.commerce.productName(),
     description: faker.commerce.productDescription(),
+    imageUrl: faker.image.image(),
 
     type: faker.commerce.department(),
     brand: faker.company.name(),
