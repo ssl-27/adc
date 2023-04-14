@@ -2,7 +2,7 @@ const config = require("../config");
 const faker = require("./faker");
 
 exports.createData = () => {
-  const data = { users: [], orders: [], products: [], comments: [] };
+  const data = { users: [], orders: [], products: [], reviews: [] };
 
   for (let i = 1; i <= config.NUMBER_OF_USERS; i++) {
     data.users.push(faker.createUser(i));
@@ -16,8 +16,8 @@ exports.createData = () => {
     data.products.push(faker.createProduct(i));
   }
 
-  for (let i = 1; i <= config.NUMBER_OF_COMMENTS; i++) {
-    data.comments.push(faker.createComment(i));
+  for (let i = 1; i <= config.NUMBER_OF_REVIEWS; i++) {
+    data.reviews.push(faker.createReview(i));
   }
 
   return data;

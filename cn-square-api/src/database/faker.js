@@ -90,10 +90,10 @@ exports.createProduct = (id) => {
 };
 
 /**
- * Create a Comment Object with fake data
- * @returns Comment
+ * Create a Review Object with fake data
+ * @returns Review
  */
-exports.createComment = (id) => {
+exports.createReview = (id) => {
   return {
     id: id,
 
