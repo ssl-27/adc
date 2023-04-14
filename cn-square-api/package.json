@@ -5,11 +5,15 @@
   "license": "MIT",
   "dependencies": {
     "@faker-js/faker": "^7.6.0",
+    "bcrypt": "^5.1.0",
     "json-server": "^0.17.3",
+    "json-server-auth": "^2.1.0",
+    "nodemon": "^2.0.22",
     "prettier": "^2.8.7"
   },
   "scripts": {
-    "start": "node src/index",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
     "format": "prettier -w ."
   }
 }

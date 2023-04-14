@@ -1,4 +1,5 @@
 const { faker } = require("@faker-js/faker");
+const bcrypt = require("bcrypt")
 const config = require("../config/index");
 
 /**
@@ -10,7 +11,7 @@ exports.createUser = (id) => {
     id: id,
 
     userName: faker.internet.userName(),
-    password: faker.internet.password(),
+    password: bcrypt.hashSync(faker.internet.password(), 10),
 
     firstName: faker.name.firstName(),
     lastName: faker.name.firstName(),
