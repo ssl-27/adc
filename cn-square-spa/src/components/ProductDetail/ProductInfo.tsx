@@ -11,16 +11,41 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useState } from "react";
 
 function ProductInfo(props) {
   const { info } = props;
-  const { name, description, prices } = info;
+  const { id, name, description, prices, imageUrl } = info;
+  const [quantity, setQuantity] = useState(1);
   const updateCount = (event) => {
-    // TODO: update cart?
+    setQuantity(event.target.value);
+  };
+  const updateCart = (event) => {
+    const cartItem: CartItem = {
+      id: id,
+      name: name,
+      imageUrl: imageUrl,
+      price: prices[0].price, // TODO: determine price
+      quantity: quantity,
+    };
+    const storedCart = JSON.parse(window.localStorage.getItem("cart")) as
+      | CartItem[]
+      | null;
+    if (storedCart !== null) {
+      const index = storedCart.findIndex((value) => value.id === cartItem.id);
+      if (index !== -1) {
+        storedCart[index] = cartItem;
+      } else {
+        storedCart.push(cartItem);
+      }
+      window.localStorage.setItem("cart", JSON.stringify(storedCart));
+    } else {
+      window.localStorage.setItem("cart", JSON.stringify([cartItem]));
+    }
   };
   return (
     <Card>
-      <img src={"/sample.jpg"} loading="lazy" width="400px" />
+      <img src={imageUrl} loading="lazy" width="400px" />
       <CardContent>
         <Typography>{name}</Typography>
         <List subheader={<ListSubheader>Prices</ListSubheader>}>
@@ -43,7 +68,7 @@ function ProductInfo(props) {
             defaultValue={"1"}
             onChange={updateCount}
           />
-          <Button>Add to Cart</Button>
+          <Button onClick={updateCart}>Add to Cart</Button>
         </Box>
         <Divider textAlign={"left"}>
           <Typography>Product Info</Typography>

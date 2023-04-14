@@ -9,8 +9,49 @@ import {
   Typography,
 } from "@mui/material";
 import ProductCartCard from "./ProductCartCard";
+import { ReactElement, useEffect, useState } from "react";
 
 function MyCart() {
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [cartComponents, setCartComponents] = useState<ReactElement[]>([]);
+  const [subTotal, setSubTotal] = useState<number>(0);
+  // check localstorage and update cart
+  useEffect(() => {
+    const storedCart = JSON.parse(window.localStorage.getItem("cart"));
+    if (storedCart !== null) {
+      setCart(storedCart);
+    }
+  }, []);
+  const removeCartItemByIndex = (id: number) => {
+    const newCart = cart.filter((v) => v.id !== id);
+    window.localStorage.setItem("cart", JSON.stringify(newCart));
+    setCart(newCart);
+  };
+  const updateQuantity = (id: number, quantity: number) => {
+    // Need to create new array to fire the useEffect after setCart
+    const i = cart.findIndex((v) => v.id === id);
+    const newCart = cart.filter((v) => v.id !== id);
+    const cartItem = cart.find((v) => v.id === id) as CartItem;
+    cartItem.quantity = quantity;
+    newCart.splice(i, 0, cartItem);
+    window.localStorage.setItem("cart", JSON.stringify(newCart));
+    setCart(newCart);
+  };
+  useEffect(() => {
+    setCartComponents(
+      cart.map((v) => (
+        <ProductCartCard
+          key={v.id}
+          info={v}
+          removeItem={() => removeCartItemByIndex(v.id)}
+          updateCount={(e) => updateQuantity(v.id, e.target.value)}
+        />
+      ))
+    );
+    setSubTotal(
+      cart.reduce<number>((prev, curr) => prev + curr.price * curr.quantity, 0)
+    );
+  }, [cart]);
   return (
     <Container
       sx={{
@@ -26,9 +67,7 @@ function MyCart() {
           <Typography variant="h6">My Cart</Typography>
           <Divider sx={{ mb: "5px" }} />
           <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            <ProductCartCard />
-            <ProductCartCard />
-            <ProductCartCard />
+            {cartComponents}
           </Box>
         </CardContent>
       </Card>
@@ -44,7 +83,7 @@ function MyCart() {
             }}
           >
             <Typography>Sub-total</Typography>
-            <Typography>$30</Typography>
+            <Typography>{`HKD$${subTotal}`}</Typography>
           </Box>
           <Box
             sx={{
@@ -65,7 +104,7 @@ function MyCart() {
             }}
           >
             <Typography>Total</Typography>
-            <Typography>$30</Typography>
+            <Typography>{`HKD$${subTotal}`}</Typography>
           </Box>
           <Divider />
         </CardContent>

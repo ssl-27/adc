@@ -18,7 +18,6 @@ function ReviewSection(props) {
       rating={v.rating}
     ></Review>
   ));
-  // TODO: fetch all comments
   return (
     <Card>
       <CardContent

@@ -9,24 +9,29 @@ function CNShop() {
   // TODO: show different price tiers?
   const preprocess = (data: Product[]) => {
     return data.map((v) => {
-      const { id, name, type, brand, popularity, prices } = v;
+      const { id, name, type, brand, imageUrl, popularity, prices } = v;
       const price = prices[0].price;
       return {
         id,
         name,
         type,
         brand,
+        imageUrl,
         popularity,
         price,
       };
     });
   };
-  const [previewInfo, setPreviewInfo] = useState(preprocess(data));
+  const unfiltered = preprocess(data);
+  const [previewInfo, setPreviewInfo] = useState(unfiltered);
   return (
     <Container maxWidth="xl">
       <Typography>Shop</Typography>
       <Box sx={{ display: "flex", alignItems: "flex-start", gap: "30px" }}>
-        <ProductFilter></ProductFilter>
+        <ProductFilter
+          info={unfiltered}
+          setPreviewInfo={setPreviewInfo}
+        ></ProductFilter>
         <Catalogue info={previewInfo}></Catalogue>
       </Box>
     </Container>

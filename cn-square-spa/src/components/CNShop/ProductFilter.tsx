@@ -9,13 +9,21 @@ import {
   Slider,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function ProductFilter() {
+function ProductFilter(props) {
+  const { info, setPreviewInfo } = props;
   const [priceRange, setPriceRange] = useState<number[]>([20, 50]);
   const updatePriceRange = (event, newValue: number | number[]) => {
     setPriceRange(newValue as number[]);
   };
+  useEffect(() => {
+    const lowerBound = priceRange[0] * 10;
+    const upperBound = priceRange[1] * 10;
+    setPreviewInfo(
+      info.filter((v) => lowerBound <= v.price && upperBound >= v.price)
+    );
+  }, [priceRange]);
   return (
     <Box sx={{ width: "250px", display: "inline-block" }}>
       <Accordion>

@@ -10,6 +10,7 @@ function Catalogue(props) {
         id={v.id}
         name={v.name}
         price={v.price}
+        imageUrl={v.imageUrl}
       ></ProductCard>
     );
   });

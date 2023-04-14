@@ -8,17 +8,16 @@ import {
 } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 
-function ProductCartCard() {
-  const updateCount = (event) => {
-    // TODO: update cart?
-  };
+function ProductCartCard(props) {
+  const { info, removeItem, updateCount } = props;
+  const { id, name, imageUrl, price, quantity } = info as CartItem;
   return (
     <Card>
       <CardContent sx={{ display: "flex", flexDirection: "row", gap: "10px" }}>
         <Box>
-          <img src={"/sample.jpg"} loading="lazy" width="200px" />
-          <Typography>Test item</Typography>
-          <Typography>HK$10</Typography>
+          <img src={imageUrl} loading="lazy" width="200px" />
+          <Typography>{name}</Typography>
+          <Typography>{`HK$${price}`}</Typography>
         </Box>
         <Box>
           <TextField
@@ -26,10 +25,10 @@ function ProductCartCard() {
             label="Quantity"
             type="number"
             InputProps={{ inputProps: { min: 1, max: 100 } }}
-            defaultValue={"1"}
-            onChange={updateCount}
+            defaultValue={quantity}
+            onInput={updateCount}
           />
-          <IconButton>
+          <IconButton onClick={removeItem}>
             <CancelIcon />
           </IconButton>
         </Box>

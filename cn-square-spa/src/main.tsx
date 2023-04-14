@@ -36,7 +36,7 @@ const router = createBrowserRouter([
         loader: async ({ params }) => {
           const productResponse = await cnAxios.get(`/products/${params.id}`);
           const reviewResponse = await cnAxios.get(
-            `/products/${params.id}/comments`
+            `/products/${params.id}/reviews`
           );
           return [productResponse.data, reviewResponse.data];
         },
