@@ -1,4 +1,5 @@
 const { faker } = require("@faker-js/faker");
+const config = require("../config/index");
 
 /**
  * Create a User object with fake data
@@ -40,7 +41,10 @@ exports.createOrder = (id) => {
   let items = [];
   for (let i = 0; i < faker.datatype.number({ min: 1, max: 10 }); i++) {
     items.push({
-      productId: faker.datatype.number({ min: 1, max: 100 }),
+      productId: faker.datatype.number({
+        min: 1,
+        max: config.NUMBER_OF_PRODUCTS,
+      }),
       quantity: faker.datatype.number({ min: 1, max: 10 }),
     });
   }
@@ -48,7 +52,7 @@ exports.createOrder = (id) => {
   return {
     id: id,
 
-    userId: faker.datatype.number({ min: 1, max: 100 }),
+    userId: faker.datatype.number({ min: 1, max: config.NUMBER_OF_USERS }),
 
     items: items,
 
@@ -93,8 +97,11 @@ exports.createComment = (id) => {
   return {
     id: id,
 
-    userId: faker.datatype.number({ min: 1, max: 100 }),
-    productId: faker.datatype.number({ min: 1, max: 100 }),
+    userId: faker.datatype.number({ min: 1, max: config.NUMBER_OF_USERS }),
+    productId: faker.datatype.number({
+      min: 1,
+      max: config.NUMBER_OF_PRODUCTS,
+    }),
 
     message: faker.lorem.paragraph(),
     rating: faker.datatype.number({ min: 3, max: 5 }),

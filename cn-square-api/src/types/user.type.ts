@@ -22,4 +22,4 @@ export type User = {
   birthDate: string;
 
   registeredAt: string;
-}
+};
