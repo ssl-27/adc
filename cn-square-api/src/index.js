@@ -1,5 +1,5 @@
 const jsonServer = require("json-server");
-const auth = require('json-server-auth')
+const auth = require("json-server-auth");
 const cors = require("cors");
 const database = require("./database/index");
 
@@ -24,7 +24,7 @@ const middlewares = jsonServer.defaults();
 
 // Configure the express server
 
-app.use(cors())
+app.use(cors());
 app.use(auth);
 app.use(middlewares);
 app.use(router);

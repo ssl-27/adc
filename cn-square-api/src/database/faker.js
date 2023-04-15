@@ -1,5 +1,5 @@
 const { faker } = require("@faker-js/faker");
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
 const config = require("../config/index");
 
 /**

@@ -37,16 +37,21 @@ function Copyright(props: any) {
 
 const theme = createTheme();
 
-export default function SignUp() {  
+export default function SignUp() {
   const navigate = useNavigate();
-  const [shouldShowAlert, setShouldShowAlert] = useState(false)
+  const [shouldShowAlert, setShouldShowAlert] = useState(false);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const data = new FormData(event.currentTarget);
 
-    if (!data.get("email") || !data.get("password") || !data.get("firstName") || !data.get("lastName")) {
+    if (
+      !data.get("email") ||
+      !data.get("password") ||
+      !data.get("firstName") ||
+      !data.get("lastName")
+    ) {
       setShouldShowAlert(true);
     }
 
@@ -67,7 +72,7 @@ export default function SignUp() {
         }
       })
       .catch((err) => {
-        setShouldShowAlert(true)
+        setShouldShowAlert(true);
         console.log(err);
       });
   };
@@ -90,7 +95,13 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          { shouldShowAlert ? <Alert sx={{ mt: 2 }} severity="error">Please fill out all required fields</Alert> : "" }
+          {shouldShowAlert ? (
+            <Alert sx={{ mt: 2 }} severity="error">
+              Please fill out all required fields
+            </Alert>
+          ) : (
+            ""
+          )}
           <Box
             component="form"
             noValidate

@@ -37,9 +37,9 @@ function Copyright(props: any) {
 
 const theme = createTheme();
 
-export default function LogIn() {    
+export default function LogIn() {
   const navigate = useNavigate();
-  const [shouldShowAlert, setShouldShowAlert] = useState(false)
+  const [shouldShowAlert, setShouldShowAlert] = useState(false);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -61,7 +61,7 @@ export default function LogIn() {
         }
       })
       .catch((err) => {
-        setShouldShowAlert(true)
+        setShouldShowAlert(true);
         console.log(err);
       });
   };
@@ -84,7 +84,13 @@ export default function LogIn() {
           <Typography component="h1" variant="h5">
             Log in
           </Typography>
-          { shouldShowAlert ? <Alert sx={{ mt: 2 }} severity="error">Incorrect Email Address or Password</Alert> : "" }
+          {shouldShowAlert ? (
+            <Alert sx={{ mt: 2 }} severity="error">
+              Incorrect Email Address or Password
+            </Alert>
+          ) : (
+            ""
+          )}
           <Box
             component="form"
             onSubmit={handleSubmit}
