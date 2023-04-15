@@ -15,7 +15,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import cnAxios from "../../utils/cn-axios";
 import { useNavigate } from "react-router-dom";
 import { Alert } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
 function Copyright(props: any) {
   return (
@@ -40,6 +41,7 @@ const theme = createTheme();
 export default function LogIn() {
   const navigate = useNavigate();
   const [shouldShowAlert, setShouldShowAlert] = useState(false);
+  const { updateUser } = useContext(UserContext);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -57,6 +59,10 @@ export default function LogIn() {
         if (res.data) {
           localStorage.setItem("token", res.data.accessToken);
           localStorage.setItem("userId", res.data.user.id);
+          updateUser({
+            id: res.data.user.id,
+            accessToken: res.data.accessToken,
+          });
           navigate("/");
         }
       })
