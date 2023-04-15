@@ -112,5 +112,7 @@ exports.createReview = (id) => {
 
     message: faker.lorem.paragraph(),
     rating: faker.datatype.number({ min: 3, max: 5 }),
+
+    createdAt: faker.date.past(),
   };
 };
