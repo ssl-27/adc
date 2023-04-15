@@ -1,4 +1,4 @@
-import { Avatar, Box, Typography } from "@mui/material";
+import { Avatar, Box, Rating, Typography } from "@mui/material";
 import cnAxios from "../../utils/cn-axios";
 import { useEffect, useState } from "react";
 
@@ -18,7 +18,8 @@ function Review(props) {
         <Avatar src={avatar} />
         <Typography>{userName}</Typography>
         <Typography>{message}</Typography>
-        <Typography>{`rating=${rating}`}</Typography>
+        <Typography>Rating:</Typography>
+        <Rating name="size-medium" defaultValue={rating} readOnly />
       </Box>
     );
   } else {

@@ -22,7 +22,7 @@ function ProductDetail() {
           }}
         >
           <ProductInfo info={productData} />
-          <ReviewSection reviews={reviewData} />
+          <ReviewSection reviews={reviewData} productId={productData.id} />
         </CardContent>
       </Card>
     </Container>

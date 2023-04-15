@@ -85,7 +85,7 @@ function Checkout() {
         };
       });
       const payload = {
-        userId: parseInt(user.id),
+        userId: parseInt(user.id as string),
         items: items,
         parcelLocation: ["22.3448", "114.0747"],
         status: 0,

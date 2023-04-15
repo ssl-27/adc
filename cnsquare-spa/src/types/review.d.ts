@@ -6,6 +6,6 @@ type Review = {
 
   message: string;
   rating: number; // 0 - 5
-  
+
   createdAt: string;
 };

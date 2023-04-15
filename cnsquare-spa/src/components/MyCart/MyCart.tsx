@@ -113,7 +113,7 @@ function MyCart() {
         </CardContent>
         <CardActions sx={{ justifyContent: "center" }}>
           {subTotal > 0 ? (
-            <LinkButton href="/checkout" label="Check Out" />
+            <LinkButton color={undefined} href="/checkout" label="Check Out" />
           ) : (
             <Button disabled>Check Out</Button>
           )}

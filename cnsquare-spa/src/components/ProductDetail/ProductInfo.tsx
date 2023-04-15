@@ -45,7 +45,7 @@ function ProductInfo(props) {
   };
   return (
     <Card>
-      <img src={imageUrl} loading="lazy" width="400px" />
+      <img src={imageUrl} loading="lazy" />
       <CardContent>
         <Typography>{name}</Typography>
         <List subheader={<ListSubheader>Prices</ListSubheader>}>
