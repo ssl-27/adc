@@ -1,0 +1,7 @@
+services:
+  spa:
+    image: cnsquare-spa
+    build: ./cnsqaure-spa
+  api:
+    image: cnsquare-api
+    build: ./cnsquare-api
