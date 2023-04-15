@@ -16,7 +16,8 @@ type User = {
   phoneNumber: string;
 
   creditCardIssuer: string;
-  creditCardNumber: string;
+  creditCardNumber: string; 
+  creditCardExpiryDate: string;
   creditCardCVV: string;
 
   tier: number; // 0: normal, 1: vip, 2: vvip

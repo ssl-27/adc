@@ -7,6 +7,8 @@ const config = require("../config/index");
  * @returns User
  */
 exports.createUser = (id) => {
+  const creditCardExpiryDate = `${faker.datatype.number({min: 1, max: 12}).toString().padStart(2, '0')}/${new Date(faker.date.future(5)).getFullYear()}`
+
   return {
     id: id,
 
@@ -26,6 +28,7 @@ exports.createUser = (id) => {
 
     creditCardIssuer: faker.finance.creditCardIssuer(),
     creditCardNumber: faker.finance.creditCardNumber(),
+    creditCardExpiryDate: creditCardExpiryDate,
     creditCardCVV: faker.finance.creditCardCVV(),
 
     tier: faker.datatype.number({ min: 0, max: 3 }), // 0: standard, 1: student, 2: vip
