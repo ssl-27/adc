@@ -20,6 +20,8 @@ exports.createUser = (id) => {
 
     email: faker.internet.email(),
     address: faker.address.streetAddress(true),
+    district: ["Hong Kong Island", "Kowloon", "New Territories"][faker.datatype.number({min: 0, max: 2})],
+    city: "Hong Kong",
     phoneNumber: faker.phone.number("+852 #### ####"),
 
     creditCardIssuer: faker.finance.creditCardIssuer(),

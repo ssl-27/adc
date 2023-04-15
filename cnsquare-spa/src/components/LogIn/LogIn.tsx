@@ -5,7 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { Alert } from "@mui/material";
 import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
+import { Link } from "react-router-dom";
 
 function Copyright(props: any) {
   return (
@@ -26,12 +27,7 @@ function Copyright(props: any) {
       align="center"
       {...props}
     >
-      {"Copyright © "}
-      <Link color="inherit" href="#">
-        CN Square
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
+      {"Copyright © CN Square " + new Date().getFullYear() + "."}
     </Typography>
   );
 }
@@ -135,12 +131,12 @@ export default function LogIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link to="#">
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/signup " variant="body2">
+                <Link to="/signup">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
