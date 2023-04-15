@@ -7,7 +7,6 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
-import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AddressForm from "./AddressForm";
@@ -16,16 +15,17 @@ import Review from "./Review";
 import { UserContext } from "../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 import cnAxios from "../../utils/cn-axios";
+import LinkButton from "../LinkButton";
 
-function Copyright() {
+function Copyright(props: any) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © CN Square " + new Date().getFullYear() + "."}
     </Typography>
   );
 }
@@ -51,10 +51,14 @@ function Checkout() {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
   const [userData, setUserData] = useState<User | undefined>(undefined);
+  const cart = JSON.parse(window.localStorage.getItem("cart") as string);
   useEffect(() => {
     if (user.id === null) {
       navigate("/login");
     } else {
+      if (cart.length === 0) {
+        navigate("/cart");
+      }
       cnAxios.get(`/users/${user.id}`).then((res) => {
         setUserData(res.data);
       });
@@ -70,9 +74,31 @@ function Checkout() {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+
+  // create new order
+  useEffect(() => {
+    if (activeStep == 3) {
+      const items = cart.map((v) => {
+        return {
+          productId: parseInt(v.id),
+          quantity: parseInt(v.quantity),
+        };
+      });
+      const payload = {
+        userId: parseInt(user.id),
+        items: items,
+        parcelLocation: ["22.3448", "114.0747"],
+        status: 0,
+      };
+      cnAxios.post("/orders", payload);
+      window.localStorage.setItem("cart", JSON.stringify([]));
+    }
+  }, [activeStep]);
+
   if (userData === undefined) {
     return <div></div>;
   }
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -101,6 +127,9 @@ function Checkout() {
                 confirmation, and will send you an update when your order has
                 shipped.
               </Typography>
+              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                <LinkButton color="primary" href="/" label="home" />
+              </Box>
             </Fragment>
           ) : (
             <Fragment>

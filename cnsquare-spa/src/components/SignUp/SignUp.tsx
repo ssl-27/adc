@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Alert } from "@mui/material";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../contexts/UserContext";
 
 function Copyright(props: any) {
   return (
@@ -36,6 +37,7 @@ const theme = createTheme();
 export default function SignUp() {
   const navigate = useNavigate();
   const [shouldShowAlert, setShouldShowAlert] = useState(false);
+  const { updateUser } = React.useContext(UserContext);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -62,8 +64,10 @@ export default function SignUp() {
       .post("/signup", payload)
       .then((res) => {
         if (res.data) {
-          localStorage.setItem("token", res.data.accessToken);
-          localStorage.setItem("userId", res.data.user.id);
+          updateUser({
+            id: res.data.user.id,
+            accessToken: res.data.accessToken,
+          });
           navigate("/");
         }
       })

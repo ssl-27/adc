@@ -7,7 +7,7 @@ function CNAppBar() {
   const { user, removeUser } = useContext(UserContext);
   const userButton =
     user.id === null ? (
-      <LinkButton href="/login" label="Login" />
+      <LinkButton color="inherit" href="/login" label="Login" />
     ) : (
       <Button color="inherit" onClick={removeUser}>
         Logout
@@ -20,12 +20,12 @@ function CNAppBar() {
           CN-Square
         </Typography>
         <Box sx={{ flexGrow: 1 }}>
-          <LinkButton href="/" label="Home" />
-          <LinkButton href="/shop" label="Shop" />
+          <LinkButton color="inherit" href="/" label="Home" />
+          <LinkButton color="inherit" href="/shop" label="Shop" />
         </Box>
         <Box>
           {userButton}
-          <LinkButton href="/cart" label="My Cart" />
+          <LinkButton color="inherit" href="/cart" label="My Cart" />
         </Box>
       </Toolbar>
     </AppBar>

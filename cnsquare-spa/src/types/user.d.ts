@@ -16,7 +16,7 @@ type User = {
   phoneNumber: string;
 
   creditCardIssuer: string;
-  creditCardNumber: string; 
+  creditCardNumber: string;
   creditCardExpiryDate: string;
   creditCardCVV: string;
 
