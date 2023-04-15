@@ -11,6 +11,8 @@ type User = {
 
   email: string;
   address: string;
+  district: string;
+  city: string;
   phoneNumber: string;
 
   creditCardIssuer: string;
