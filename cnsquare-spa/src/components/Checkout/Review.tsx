@@ -7,8 +7,15 @@ import Grid from "@mui/material/Grid";
 
 export default function Review(props) {
   const { info } = props;
-  const { firstName, lastName, address, district, city, creditCardNumber } =
-    info as User;
+  const {
+    firstName,
+    lastName,
+    address,
+    district,
+    city,
+    creditCardNumber,
+    creditCardExpiryDate,
+  } = info as User;
   const cart = JSON.parse(window.localStorage.getItem("cart") as string);
   const products = cart.map((v) => {
     return {
@@ -25,7 +32,7 @@ export default function Review(props) {
       name: "Card number",
       detail: `${creditCardNumber.replace(/\d\d\d\d/, "XXXX")}`,
     },
-    { name: "Expiry date", detail: "TODO" },
+    { name: "Expiry date", detail: creditCardExpiryDate },
   ];
   const total = products.reduce<number>((prev, curr) => prev + curr.price, 0);
   return (

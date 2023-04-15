@@ -7,7 +7,13 @@ import Checkbox from "@mui/material/Checkbox";
 
 export default function PaymentForm(props) {
   const { info } = props;
-  const { firstName, lastName, creditCardNumber, creditCardCVV } = info as User;
+  const {
+    firstName,
+    lastName,
+    creditCardNumber,
+    creditCardCVV,
+    creditCardExpiryDate,
+  } = info as User;
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -41,7 +47,7 @@ export default function PaymentForm(props) {
             required
             id="expDate"
             label="Expiry date"
-            defaultValue={"TODO"}
+            defaultValue={creditCardExpiryDate}
             fullWidth
             autoComplete="cc-exp"
             variant="standard"
