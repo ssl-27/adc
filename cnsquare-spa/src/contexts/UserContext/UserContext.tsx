@@ -12,6 +12,8 @@ function UserContextProvider(props) {
 
   const updateUser = (u: UserLoginInfo) => {
     setUser({ ...user, user: u });
+    window.localStorage.setItem("userId", u.id as string);
+    window.localStorage.setItem("token", u.accessToken as string);
   };
 
   const removeUser = () => {

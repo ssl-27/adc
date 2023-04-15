@@ -57,8 +57,6 @@ export default function LogIn() {
       .post("/login", payload)
       .then((res) => {
         if (res.data) {
-          localStorage.setItem("token", res.data.accessToken);
-          localStorage.setItem("userId", res.data.user.id);
           updateUser({
             id: res.data.user.id,
             accessToken: res.data.accessToken,

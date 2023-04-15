@@ -10,6 +10,7 @@ import cnAxios from "./utils/cn-axios";
 import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 import { UserContextProvider } from "./contexts/UserContext";
+import Checkout from "./components/Checkout";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
           );
           return [productResponse.data, reviewResponse.data];
         },
+      },
+      {
+        path: "checkout",
+        element: <Checkout />,
       },
     ],
   },

@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import ProductCartCard from "./ProductCartCard";
 import { ReactElement, useEffect, useState } from "react";
+import LinkButton from "../LinkButton";
 
 function MyCart() {
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -111,7 +112,7 @@ function MyCart() {
           <Divider />
         </CardContent>
         <CardActions sx={{ justifyContent: "center" }}>
-          <Button>Check Out</Button>
+          <LinkButton href="/checkout" label="Check Out" />
         </CardActions>
       </Card>
     </Container>
