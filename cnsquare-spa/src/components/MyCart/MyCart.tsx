@@ -17,7 +17,9 @@ function MyCart() {
   const [subTotal, setSubTotal] = useState<number>(0);
   // check localstorage and update cart
   useEffect(() => {
-    const storedCart = JSON.parse(window.localStorage.getItem("cart"));
+    const storedCart = JSON.parse(
+      window.localStorage.getItem("cart") as string
+    );
     if (storedCart !== null) {
       setCart(storedCart);
     }

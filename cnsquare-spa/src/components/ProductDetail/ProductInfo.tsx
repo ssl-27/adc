@@ -28,9 +28,9 @@ function ProductInfo(props) {
       price: prices[0].price, // TODO: determine price
       quantity: quantity,
     };
-    const storedCart = JSON.parse(window.localStorage.getItem("cart")) as
-      | CartItem[]
-      | null;
+    const storedCart = JSON.parse(
+      window.localStorage.getItem("cart") as string
+    ) as CartItem[] | null;
     if (storedCart !== null) {
       const index = storedCart.findIndex((value) => value.id === cartItem.id);
       if (index !== -1) {
