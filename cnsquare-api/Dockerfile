@@ -1,4 +1,6 @@
-FROM node:lts-hydrogen
+# For production only
+
+FROM node:lts-alpine
 
 WORKDIR /app
 

@@ -31,6 +31,8 @@ app.use(router);
 
 // Start the server and listen to port 3000
 
-app.listen(3000, () => {
-  console.log("JSON Server is running");
+const port = process.env.PORT || 3000
+
+app.listen(port, () => {
+  console.log(`JSON Server is listening at port ${port}`);
 });
