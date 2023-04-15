@@ -4,9 +4,11 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import { FormControl, InputLabel, Menu, MenuItem, Select } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
-export default function AddressForm() {
+export default function AddressForm(props) {
+  const { info } = props;
+  const { firstName, lastName, address, district, city } = info as User;
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -19,6 +21,7 @@ export default function AddressForm() {
             id="firstName"
             name="firstName"
             label="First name"
+            defaultValue={firstName}
             fullWidth
             autoComplete="given-name"
             variant="standard"
@@ -30,6 +33,7 @@ export default function AddressForm() {
             id="lastName"
             name="lastName"
             label="Last name"
+            defaultValue={lastName}
             fullWidth
             autoComplete="family-name"
             variant="standard"
@@ -41,6 +45,7 @@ export default function AddressForm() {
             id="address1"
             name="address1"
             label="Address line 1"
+            defaultValue={address}
             fullWidth
             autoComplete="shipping address-line1"
             variant="standard"
@@ -57,14 +62,14 @@ export default function AddressForm() {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-            <FormControl fullWidth>
-                <InputLabel>District</InputLabel>
-                <Select label="District">
-                    <MenuItem value={"New Territories"}>New Territories</MenuItem>
-                    <MenuItem value={"Kowloon"}>Kowloon</MenuItem>
-                    <MenuItem value={"Hong Kong Island"}>Hong Kong Island</MenuItem>
-                </Select>
-            </FormControl>
+          <FormControl fullWidth>
+            <InputLabel>District</InputLabel>
+            <Select label="District" defaultValue={district}>
+              <MenuItem value={"New Territories"}>New Territories</MenuItem>
+              <MenuItem value={"Kowloon"}>Kowloon</MenuItem>
+              <MenuItem value={"Hong Kong Island"}>Hong Kong Island</MenuItem>
+            </Select>
+          </FormControl>
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -72,7 +77,7 @@ export default function AddressForm() {
             id="city"
             name="city"
             label="City"
-            defaultValue={"Hong Kong"}
+            defaultValue={city}
             fullWidth
             autoComplete="shipping address-level2"
             variant="standard"
@@ -81,7 +86,12 @@ export default function AddressForm() {
         <Grid item xs={12}>
           <FormControlLabel
             control={
-              <Checkbox color="secondary" name="saveAddress" value="yes" />
+              <Checkbox
+                color="secondary"
+                name="saveAddress"
+                value="yes"
+                defaultChecked
+              />
             }
             label="Use this address for payment details"
           />

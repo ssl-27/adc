@@ -1,9 +1,7 @@
 import { useContext, useEffect, useState, Fragment } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import Toolbar from "@mui/material/Toolbar";
 import Paper from "@mui/material/Paper";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -34,14 +32,14 @@ function Copyright() {
 
 const steps = ["Shipping address", "Payment details", "Review your order"];
 
-function getStepContent(step: number) {
+function getStepContent(step: number, userData: User) {
   switch (step) {
     case 0:
-      return <AddressForm />;
+      return <AddressForm info={userData} />;
     case 1:
-      return <PaymentForm />;
+      return <PaymentForm info={userData} />;
     case 2:
-      return <Review />;
+      return <Review info={userData} />;
     default:
       throw new Error("Unknown step");
   }
@@ -52,14 +50,14 @@ const theme = createTheme();
 function Checkout() {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
-  const [userData, setUserData] = useState(undefined);
+  const [userData, setUserData] = useState<User | undefined>(undefined);
   useEffect(() => {
     if (user.id === null) {
       navigate("/login");
     } else {
-        cnAxios.get(`/users/${user.id}`).then((res) => {
-            setUserData(res.data);
-        });
+      cnAxios.get(`/users/${user.id}`).then((res) => {
+        setUserData(res.data);
+      });
     }
   }, []);
   // From template:
@@ -72,7 +70,9 @@ function Checkout() {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
-
+  if (userData === undefined) {
+    return <div></div>;
+  }
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -104,7 +104,7 @@ function Checkout() {
             </Fragment>
           ) : (
             <Fragment>
-              {getStepContent(activeStep)}
+              {getStepContent(activeStep, userData as User)}
               <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                 {activeStep !== 0 && (
                   <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>

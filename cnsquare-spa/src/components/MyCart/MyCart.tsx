@@ -112,7 +112,11 @@ function MyCart() {
           <Divider />
         </CardContent>
         <CardActions sx={{ justifyContent: "center" }}>
-          <LinkButton href="/checkout" label="Check Out" />
+          {subTotal > 0 ? (
+            <LinkButton href="/checkout" label="Check Out" />
+          ) : (
+            <Button disabled>Check Out</Button>
+          )}
         </CardActions>
       </Card>
     </Container>
