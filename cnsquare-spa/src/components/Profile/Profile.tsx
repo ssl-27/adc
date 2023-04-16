@@ -7,11 +7,13 @@ import {
   Checkbox,
   Container,
   FormControlLabel,
+  LinearProgress,
   Grid,
   Link,
   TextField,
   Typography,
 } from "@mui/material";
+import SaveIcon from "@mui/icons-material/Save";
 import { useContext, useEffect, useState } from "react";
 import cnAxios from "../../utils/cn-axios";
 import { UserContext } from "../../contexts/UserContext";
@@ -36,6 +38,9 @@ function Profile() {
   const [creditCardNumber, setCreditCardNumber] = useState("");
   const [creditCardExpiryDate, setCreditCardExpiryDate] = useState("");
   const [creditCardCVV, setCreditCardCVV] = useState("");
+
+  const [tier, setTier] = useState(0);
+  const [points, setPoints] = useState(0);
 
   const { user } = useContext(UserContext);
 
@@ -65,6 +70,9 @@ function Profile() {
         setCreditCardNumber(data.creditCardNumber);
         setCreditCardExpiryDate(data.creditCardExpiryDate);
         setCreditCardCVV(data.creditCardCVV);
+
+        setTier(data.tier);
+        setPoints(data.points);
       })
       .catch((err) => console.log(err));
   };
@@ -74,6 +82,7 @@ function Profile() {
 
     if (!email || !firstName || !lastName || !userName) {
       setShouldShowErrorAlert(true);
+      window.scrollTo(0, 0);
       return;
     }
 
@@ -105,7 +114,11 @@ function Profile() {
         setShouldShowErrorAlert(true);
         console.log(err);
       });
+
+    window.scrollTo(0, 0);
   };
+
+  const tiers = ["CN Square Member", "CN Square Student", "CN Square VIP"];
 
   return (
     <Container maxWidth="md">
@@ -124,6 +137,52 @@ function Profile() {
       )}
       <Box component="form" onSubmit={handleSubmit} noValidate>
         <Typography variant="h6" sx={{ mt: 2, mb: 2 }}>
+          Membership Information
+        </Typography>{" "}
+        <Box sx={{ display: "flex" }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="tier"
+            label="Membership Tier"
+            name="tier"
+            value={tiers[tier] || ""}
+            onChange={(e) => setFirstName(e.target.value)}
+            sx={{ flexBasis: 0, flexGrow: 1, minWidth: 0, mr: 2 }}
+            InputProps={{
+              readOnly: true,
+            }}
+          />
+          <TextField
+            margin="normal"
+            required
+            aria-readonly
+            fullWidth
+            id="points"
+            label="Reward Points"
+            name="points"
+            value={points || ""}
+            onChange={(e) => setLastName(e.target.value)}
+            sx={{ flexBasis: 0, flexGrow: 1, minWidth: 0, ml: 2 }}
+            InputProps={{
+              readOnly: true,
+            }}
+          />
+        </Box>
+        {points < 1000 ? (
+          <div>
+            <LinearProgress
+              variant="determinate"
+              value={(points * 100) / 1000}
+              sx={{ mt: 2 }}
+            />
+            <p>Earn {1000 - points} more points to become VIP member</p>
+          </div>
+        ) : (
+          ""
+        )}
+        <Typography variant="h6" sx={{ mt: 2, mb: 2 }}>
           Personal Information
         </Typography>
         <Avatar alt={firstName} src={avatar} sx={{ width: 64, height: 64 }}>
@@ -140,7 +199,6 @@ function Profile() {
             value={firstName || ""}
             onChange={(e) => setFirstName(e.target.value)}
             sx={{ flexBasis: 0, flexGrow: 1, minWidth: 0, mr: 2 }}
-            autoComplete="firstName"
           />
           <TextField
             margin="normal"
@@ -152,7 +210,6 @@ function Profile() {
             value={lastName || ""}
             onChange={(e) => setLastName(e.target.value)}
             sx={{ flexBasis: 0, flexGrow: 1, minWidth: 0, ml: 2 }}
-            autoComplete="lastName"
           />
         </Box>
         <TextField
@@ -164,7 +221,6 @@ function Profile() {
           name="userName"
           value={userName || ""}
           onChange={(e) => setUserName(e.target.value)}
-          autoComplete="userName"
         />
         <TextField
           margin="normal"
@@ -175,9 +231,7 @@ function Profile() {
           name="email"
           value={email || ""}
           onChange={(e) => setEmail(e.target.value)}
-          autoComplete="email"
         />
-
         <Typography variant="h6" sx={{ mt: 2, mb: 2 }}>
           Delivery Information
         </Typography>
@@ -189,7 +243,6 @@ function Profile() {
           name="address"
           value={address || ""}
           onChange={(e) => setAddress(e.target.value)}
-          autoComplete="address"
         />
         <TextField
           margin="normal"
@@ -199,7 +252,6 @@ function Profile() {
           name="district"
           value={district || ""}
           onChange={(e) => setDistrict(e.target.value)}
-          autoComplete="district"
         />
         <TextField
           margin="normal"
@@ -209,7 +261,6 @@ function Profile() {
           name="city"
           value={city || ""}
           onChange={(e) => setCity(e.target.value)}
-          autoComplete="city"
         />
         <TextField
           margin="normal"
@@ -219,7 +270,6 @@ function Profile() {
           name="phoneNumber"
           value={phoneNumber || ""}
           onChange={(e) => setPhoneNumber(e.target.value)}
-          autoComplete="phoneNumber"
         />
         <Typography variant="h6" sx={{ mt: 2, mb: 2 }}>
           Payment Information
@@ -232,7 +282,6 @@ function Profile() {
           name="creditCardNumber"
           value={creditCardNumber || ""}
           onChange={(e) => setCreditCardNumber(e.target.value)}
-          autoComplete="creditCardNumber"
         />
         <Box sx={{ display: "flex" }}>
           <TextField
@@ -243,7 +292,6 @@ function Profile() {
             value={creditCardExpiryDate || ""}
             onChange={(e) => setCreditCardExpiryDate(e.target.value)}
             sx={{ flexBasis: 0, flexGrow: 1, minWidth: 0, mr: 2 }}
-            autoComplete="creditCardExpiryDate"
           />
           <TextField
             margin="normal"
@@ -254,11 +302,11 @@ function Profile() {
             value={creditCardCVV || ""}
             onChange={(e) => setCreditCardCVV(e.target.value)}
             sx={{ flexBasis: 0, flexGrow: 1, minWidth: 0, ml: 2 }}
-            autoComplete="creditCardCVV"
           />
         </Box>
         <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
           Update
+          <SaveIcon sx={{ pl: 1 }} />
         </Button>
       </Box>
     </Container>

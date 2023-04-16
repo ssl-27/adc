@@ -3,6 +3,7 @@ import LinkButton from "../LinkButton";
 import MenuDropdown from "./MenuDropdown";
 import { UserContext } from "../../contexts/UserContext";
 import { useContext } from "react";
+import MemberInfo from "./MemberInfo";
 
 function CNAppBar() {
   const { user } = useContext(UserContext);
@@ -10,7 +11,10 @@ function CNAppBar() {
     user.id === null ? (
       <LinkButton color="inherit" href="/login" label="Login" />
     ) : (
-      <MenuDropdown />
+      <Box sx={{ display: "flex", alignItems: "center" }}>
+        <MemberInfo />
+        <MenuDropdown />
+      </Box>
     );
   return (
     <AppBar>

@@ -76,7 +76,7 @@ export default function SignUp() {
       creditCardCVV: "",
 
       tier: 0,
-      points: 1000,
+      points: 100,
       birthDate: "",
 
       registeredAt: new Date().toISOString(),
