@@ -1,17 +1,16 @@
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
 import LinkButton from "../LinkButton";
+import MenuDropdown from "./MenuDropdown";
 import { UserContext } from "../../contexts/UserContext";
 import { useContext } from "react";
 
 function CNAppBar() {
-  const { user, removeUser } = useContext(UserContext);
-  const userButton =
+  const { user } = useContext(UserContext);
+  const AccountButton =
     user.id === null ? (
       <LinkButton color="inherit" href="/login" label="Login" />
     ) : (
-      <Button color="inherit" onClick={removeUser}>
-        Logout
-      </Button>
+      <MenuDropdown />
     );
   return (
     <AppBar>
@@ -23,8 +22,8 @@ function CNAppBar() {
           <LinkButton color="inherit" href="/" label="Home" />
           <LinkButton color="inherit" href="/shop" label="Shop" />
         </Box>
-        <Box>
-          {userButton}
+        <Box sx={{ display: "flex" }}>
+          {AccountButton}
           <LinkButton color="inherit" href="/cart" label="My Cart" />
         </Box>
       </Toolbar>
