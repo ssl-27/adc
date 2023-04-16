@@ -10,7 +10,7 @@ RUN yarn
 
 COPY . .
 
-ENV VITE_API_URL=https://cnsqaure-api.heroku.com/
+ENV VITE_API_URL=https://cnsquare-api.herokuapp.com/
 
 RUN yarn build
 
@@ -26,5 +26,3 @@ WORKDIR /etc/nginx/conf.d/
 COPY --from=builder /app/.nginx/nginx.conf.template nginx.conf.template
 
 CMD envsubst < nginx.conf.template > default.conf && nginx -g 'daemon off;'
-
-# CMD nginx -g 'daemon off;'
