@@ -4,6 +4,7 @@ import {
   Card,
   CardContent,
   Divider,
+  Grid,
   List,
   ListItem,
   ListItemText,
@@ -45,43 +46,62 @@ function ProductInfo(props) {
   };
   return (
     <Card>
-      <img src={imageUrl} loading="lazy" />
       <CardContent>
-        <Typography>{name}</Typography>
-        <List subheader={<ListSubheader>Prices</ListSubheader>}>
-          <ListItem>
-            <ListItemText primary={`normal user: HKD$${prices[0].price}`} />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary={`vip: HKD$${prices[1].price}`} />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary={`vipp: HKD$${prices[2].price}`} />
-          </ListItem>
-        </List>
-        <Box>
-          <TextField
-            sx={{ width: "100px" }}
-            label="Quantity"
-            type="number"
-            InputProps={{ inputProps: { min: 1, max: 100 } }}
-            defaultValue={"1"}
-            onChange={updateCount}
-          />
-          <Button onClick={updateCart}>Add to Cart</Button>
-        </Box>
-        <Divider textAlign={"left"}>
-          <Typography>Product Info</Typography>
-        </Divider>
-        <Typography>{description}</Typography>
-        <Divider textAlign={"left"}>
-          <Typography>Return & Refund policy</Typography>
-        </Divider>
-        <Typography>No refunds.</Typography>
-        <Divider textAlign={"left"}>
-          <Typography>Shipping Info</Typography>
-        </Divider>
-        <Typography>Free shipping.</Typography>
+        <Grid container rowGap={2} columnGap={4} justifyContent={"center"}>
+          <Grid xs={12} container justifyContent={"center"}>
+            <img src={imageUrl} loading="lazy" />
+          </Grid>
+          <Grid xs={12}>
+            <Typography variant="h4" textAlign={"center"}>
+              {name}
+            </Typography>
+          </Grid>
+          <Grid xs={6}>
+            <Divider textAlign={"left"} sx={{ m: "5px" }}>
+              <Typography>Product Info</Typography>
+            </Divider>
+            <Typography>{description}</Typography>
+            <Divider textAlign={"left"} sx={{ m: "5px" }}>
+              <Typography>Return & Refund policy</Typography>
+            </Divider>
+            <Typography>No refunds.</Typography>
+            <Divider textAlign={"left"} sx={{ m: "5px" }}>
+              <Typography>Shipping Info</Typography>
+            </Divider>
+            <Typography>Free shipping.</Typography>
+          </Grid>
+          <Grid xs={4}>
+            <List subheader={<ListSubheader>Prices</ListSubheader>}>
+              <ListItem>
+                <ListItemText primary={`normal user: HKD$${prices[0].price}`} />
+              </ListItem>
+              <ListItem>
+                <ListItemText primary={`vip: HKD$${prices[1].price}`} />
+              </ListItem>
+              <ListItem>
+                <ListItemText primary={`vipp: HKD$${prices[2].price}`} />
+              </ListItem>
+            </List>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: "5px",
+              }}
+            >
+              <TextField
+                sx={{ width: "100px" }}
+                label="Quantity"
+                type="number"
+                InputProps={{ inputProps: { min: 1, max: 100 } }}
+                defaultValue={"1"}
+                onChange={updateCount}
+              />
+              <Button onClick={updateCart}>Add to Cart</Button>
+            </Box>
+          </Grid>
+        </Grid>
       </CardContent>
     </Card>
   );

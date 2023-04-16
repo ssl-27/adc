@@ -4,6 +4,7 @@ import {
   Card,
   CardContent,
   FormControl,
+  Grid,
   Rating,
   TextField,
   Typography,
@@ -20,12 +21,9 @@ function ReviewSection(props) {
   const isLoggedIn = user.id !== null;
 
   const reviewsComponents = reviews.map((v) => (
-    <Review
-      key={v.userId}
-      userId={v.userId}
-      message={v.message}
-      rating={v.rating}
-    ></Review>
+    <Grid key={`${v.userId}-${v.createdAt}`} xs={12}>
+      <Review userId={v.userId} message={v.message} rating={v.rating}></Review>
+    </Grid>
   ));
 
   const clearInputs = (event) => {
@@ -51,47 +49,59 @@ function ReviewSection(props) {
 
   return (
     <Card>
-      <CardContent
-        sx={{ display: "flex", flexDirection: "column", gap: "10px" }}
-      >
+      <CardContent>
         {/* TODO: move this somewhere else */}
-        <Typography>Reviews</Typography>
-        <FormControl
-          sx={{ display: "flex", flexDirection: "column", width: "75ch" }}
-        >
-          {!isLoggedIn && (
-            <Typography>Please Log in to enter your review!</Typography>
-          )}
-          <TextField
-            label="Enter your review"
-            disabled={!isLoggedIn}
-            defaultValue={reviewText}
-            onInput={(event: any) => setReviewText(event.target.value)}
-            multiline
-            variant="standard"
-            margin="dense"
-          ></TextField>
-          <Typography>Rating:</Typography>
-          <Rating
-            name="size-medium"
-            disabled={!isLoggedIn}
-            value={reviewScore}
-            onChange={(event: any) =>
-              setReviewScore(parseInt(event.target.value))
-            }
-          />
-          <ButtonGroup
-            sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
-          >
-            <Button onClick={clearInputs} disabled={!isLoggedIn}>
-              Cancel
-            </Button>
-            <Button onClick={submitReview} disabled={!isLoggedIn}>
-              Submit
-            </Button>
-          </ButtonGroup>
-        </FormControl>
-        {reviewsComponents}
+        <Grid container>
+          <Grid xs={12}>
+            <Typography>Reviews</Typography>
+          </Grid>
+          <Grid xs={12} marginBottom={"10px"}>
+            <FormControl
+              sx={{ display: "flex", flexDirection: "column", width: "75ch" }}
+            >
+              {!isLoggedIn && (
+                <Typography>Please Log in to enter your review!</Typography>
+              )}
+              <TextField
+                label="Enter your review"
+                disabled={!isLoggedIn}
+                value={reviewText}
+                onInput={(event: any) => setReviewText(event.target.value)}
+                multiline
+                variant="standard"
+                margin="dense"
+              ></TextField>
+            </FormControl>
+          </Grid>
+          <Grid xs={3} container>
+            <Typography>Rating:</Typography>
+            <Rating
+              name="size-medium"
+              disabled={!isLoggedIn}
+              value={reviewScore}
+              onChange={(event: any) =>
+                setReviewScore(parseInt(event.target.value))
+              }
+            />
+          </Grid>
+          <Grid>
+            <ButtonGroup
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <Button onClick={submitReview} disabled={!isLoggedIn}>
+                Submit
+              </Button>
+              <Button onClick={clearInputs} disabled={!isLoggedIn}>
+                Cancel
+              </Button>
+            </ButtonGroup>
+          </Grid>
+          {reviewsComponents}
+        </Grid>
       </CardContent>
     </Card>
   );

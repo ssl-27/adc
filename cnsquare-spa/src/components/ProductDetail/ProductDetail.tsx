@@ -1,5 +1,12 @@
-import { Card, CardContent, Container, Typography } from "@mui/material";
-import { Link, useLoaderData } from "react-router-dom";
+import {
+  Link,
+  Breadcrumbs,
+  Card,
+  CardContent,
+  Container,
+  Typography,
+} from "@mui/material";
+import { useLoaderData } from "react-router-dom";
 import ProductInfo from "./ProductInfo";
 import ReviewSection from "./ReviewSection";
 
@@ -7,11 +14,15 @@ function ProductDetail() {
   const [productData, reviewData] = useLoaderData() as [Product, Comment[]];
   return (
     <Container>
-      <Typography>
-        <Link to="/shop" replace={true}>
-          Back
+      <Breadcrumbs>
+        <Link underline="hover" color="inherit" href="/">
+          Home
         </Link>
-      </Typography>
+        <Link underline="hover" color="inherit" href="/shop">
+          Shop
+        </Link>
+        <Typography color="text.primary">{productData.name}</Typography>
+      </Breadcrumbs>
       <Card>
         <CardContent
           sx={{

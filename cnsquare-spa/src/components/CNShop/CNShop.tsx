@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Breadcrumbs, Container, Link, Typography } from "@mui/material";
 import Catalogue from "./Catalogue";
 import ProductFilter from "./ProductFilter";
 import { useLoaderData } from "react-router-dom";
@@ -26,7 +26,12 @@ function CNShop() {
   const [previewInfo, setPreviewInfo] = useState(unfiltered);
   return (
     <Container maxWidth="xl">
-      <Typography>Shop</Typography>
+      <Breadcrumbs>
+        <Link underline="hover" color="inherit" href="/">
+          Home
+        </Link>
+        <Typography color="text.primary">Shop</Typography>
+      </Breadcrumbs>
       <Box sx={{ display: "flex", alignItems: "flex-start", gap: "30px" }}>
         <ProductFilter
           info={unfiltered}

@@ -1,4 +1,4 @@
-import { Avatar, Box, Rating, Typography } from "@mui/material";
+import { Avatar, Grid, Rating, Typography } from "@mui/material";
 import cnAxios from "../../utils/cn-axios";
 import { useEffect, useState } from "react";
 
@@ -14,13 +14,31 @@ function Review(props) {
   if (userData) {
     const { userName, avatar } = userData;
     return (
-      <Box>
-        <Avatar src={avatar} />
-        <Typography>{userName}</Typography>
-        <Typography>{message}</Typography>
-        <Typography>Rating:</Typography>
-        <Rating name="size-medium" defaultValue={rating} readOnly />
-      </Box>
+      <Grid container marginTop={"10px"}>
+        <Grid
+          xs={6}
+          display={"flex"}
+          flexDirection={"row"}
+          alignItems={"center"}
+          gap={"7px"}
+        >
+          <Avatar src={avatar} />
+          <Typography>{userName}</Typography>
+        </Grid>
+        <Grid
+          xs={6}
+          display={"flex"}
+          flexDirection={"row"}
+          alignItems={"center"}
+          gap={"7px"}
+        >
+          <Typography>Rating:</Typography>
+          <Rating name="size-medium" defaultValue={rating} readOnly />
+        </Grid>
+        <Grid xs={12}>
+          <Typography>{message}</Typography>
+        </Grid>
+      </Grid>
     );
   } else {
     return <Typography>Loading</Typography>;
