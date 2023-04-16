@@ -6,6 +6,7 @@ import Popper from "@mui/material/Popper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import Stack from "@mui/material/Stack";
+import { Link } from "react-router-dom";
 import { SyntheticEvent, useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
@@ -94,8 +95,22 @@ export default function MenuDropdown() {
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
                   >
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                    <MenuItem onClick={handleClose}>Orders</MenuItem>
+                    <MenuItem onClick={handleClose}>
+                      <Link
+                        to="/profile"
+                        style={{ color: "inherit", textDecoration: "none" }}
+                      >
+                        Profile
+                      </Link>
+                    </MenuItem>
+                    <MenuItem onClick={handleClose}>
+                      <Link
+                        to="/orders"
+                        style={{ color: "inherit", textDecoration: "none" }}
+                      >
+                        Orders
+                      </Link>
+                    </MenuItem>
                     <MenuItem
                       onClick={(e) => {
                         handleClose(e);

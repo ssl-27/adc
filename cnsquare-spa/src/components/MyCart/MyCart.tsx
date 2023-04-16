@@ -68,10 +68,24 @@ function MyCart() {
     >
       <Card>
         <CardContent>
-          <Typography variant="h6" textAlign={"center"}>My Cart</Typography>
+          <Typography variant="h6" textAlign={"center"}>
+            My Cart
+          </Typography>
           <Divider sx={{ mb: "5px" }} />
-          <Box sx={{ display: "flex", flexDirection: "column", gap: "10px", minWidth: "250px", minHeight: "200px"}}>
-            {cartComponents.length === 0 ? <Typography textAlign={"center"}>Cart is empty.</Typography>: (cartComponents)}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "10px",
+              minWidth: "250px",
+              minHeight: "200px",
+            }}
+          >
+            {cartComponents.length === 0 ? (
+              <Typography textAlign={"center"}>Cart is empty.</Typography>
+            ) : (
+              cartComponents
+            )}
           </Box>
         </CardContent>
       </Card>
@@ -79,7 +93,9 @@ function MyCart() {
         <CardContent>
           <Grid container width={"250px"}>
             <Grid xs={12}>
-              <Typography variant="h6" textAlign={"center"}>Order Summary</Typography>
+              <Typography variant="h6" textAlign={"center"}>
+                Order Summary
+              </Typography>
             </Grid>
             <Grid xs={12}>
               <Divider sx={{ mb: "5px" }} />
@@ -95,7 +111,7 @@ function MyCart() {
             </Grid>
             <Grid xs={6}>
               <Typography>FREE</Typography>
-            </Grid> 
+            </Grid>
             <Grid xs={12}>
               <Divider sx={{ mb: "5px" }} />
             </Grid>
@@ -106,7 +122,7 @@ function MyCart() {
               <Typography>{`HKD$${subTotal}`}</Typography>
             </Grid>
             <Grid xs={12}>
-              <Divider/>
+              <Divider />
             </Grid>
           </Grid>
         </CardContent>

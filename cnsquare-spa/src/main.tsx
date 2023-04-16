@@ -11,6 +11,7 @@ import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 import { UserContextProvider } from "./contexts/UserContext";
 import Checkout from "./components/Checkout";
+import Profile from "./components/Profile";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <MyCart />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
       },
       {
         path: "product/:id",

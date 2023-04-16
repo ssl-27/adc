@@ -14,7 +14,12 @@ function Review(props) {
   const dt = Date.now() - Date.parse(timestamp);
   const days = Math.floor(dt / 1000 / 60 / 60 / 24);
   const years = Math.floor(days / 365);
-  const timestring = days === 0 ? "Just now" : years > 0 ? `${years} years ago` : `${days} days ago`;
+  const timestring =
+    days === 0
+      ? "Just now"
+      : years > 0
+      ? `${years} years ago`
+      : `${days} days ago`;
   if (userData) {
     const { userName, avatar } = userData;
     return (
