@@ -22,7 +22,7 @@ function ReviewSection(props) {
 
   const reviewsComponents = reviews.map((v) => (
     <Grid key={`${v.userId}-${v.createdAt}`} xs={12}>
-      <Review userId={v.userId} message={v.message} rating={v.rating}></Review>
+      <Review userId={v.userId} message={v.message} rating={v.rating} timestamp={v.createdAt}></Review>
     </Grid>
   ));
 

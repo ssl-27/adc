@@ -3,7 +3,7 @@ import cnAxios from "../../utils/cn-axios";
 import { useEffect, useState } from "react";
 
 function Review(props) {
-  const { userId, message, rating } = props;
+  const { userId, message, rating, timestamp } = props;
   const [userData, setUserData] = useState(undefined);
   useEffect(() => {
     const response = cnAxios.get(`/users/${userId}`);
@@ -11,6 +11,10 @@ function Review(props) {
       setUserData(res.data);
     });
   }, []);
+  const dt = Date.now() - Date.parse(timestamp);
+  const days = Math.floor(dt / 1000 / 60 / 60 / 24);
+  const years = Math.floor(days / 365);
+  const timestring = days === 0 ? "Just now" : years > 0 ? `${years} years ago` : `${days} days ago`;
   if (userData) {
     const { userName, avatar } = userData;
     return (
@@ -24,6 +28,7 @@ function Review(props) {
         >
           <Avatar src={avatar} />
           <Typography>{userName}</Typography>
+          <Typography fontSize={"11px"}>{timestring}</Typography>
         </Grid>
         <Grid
           xs={6}
