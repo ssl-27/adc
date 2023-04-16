@@ -40,7 +40,7 @@ function Review(props) {
           <Typography>Rating:</Typography>
           <Rating name="size-medium" defaultValue={rating} readOnly />
         </Grid>
-        <Grid xs={12}>
+        <Grid xs={12} marginTop={"5px"}>
           <Typography>{message}</Typography>
         </Grid>
       </Grid>

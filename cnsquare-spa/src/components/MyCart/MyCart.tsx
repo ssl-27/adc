@@ -6,6 +6,7 @@ import {
   CardContent,
   Container,
   Divider,
+  Grid,
   Typography,
 } from "@mui/material";
 import ProductCartCard from "./ProductCartCard";
@@ -60,56 +61,54 @@ function MyCart() {
       sx={{
         display: "flex",
         flexDirection: "row",
-        gap: "5px",
+        gap: "30px",
         alignItems: "flex-start",
         justifyContent: "center",
       }}
     >
       <Card>
         <CardContent>
-          <Typography variant="h6">My Cart</Typography>
+          <Typography variant="h6" textAlign={"center"}>My Cart</Typography>
           <Divider sx={{ mb: "5px" }} />
-          <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            {cartComponents}
+          <Box sx={{ display: "flex", flexDirection: "column", gap: "10px", minWidth: "250px", minHeight: "200px"}}>
+            {cartComponents.length === 0 ? <Typography textAlign={"center"}>Cart is empty.</Typography>: (cartComponents)}
           </Box>
         </CardContent>
       </Card>
       <Card>
         <CardContent>
-          <Typography variant="h6">Order Summary</Typography>
-          <Divider sx={{ mb: "5px" }} />
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <Typography>Sub-total</Typography>
-            <Typography>{`HKD$${subTotal}`}</Typography>
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <Typography>Shipping</Typography>
-            <Typography>FREE</Typography>
-          </Box>
-          <Divider sx={{ mb: "5px" }} />
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <Typography>Total</Typography>
-            <Typography>{`HKD$${subTotal}`}</Typography>
-          </Box>
-          <Divider />
+          <Grid container width={"250px"}>
+            <Grid xs={12}>
+              <Typography variant="h6" textAlign={"center"}>Order Summary</Typography>
+            </Grid>
+            <Grid xs={12}>
+              <Divider sx={{ mb: "5px" }} />
+            </Grid>
+            <Grid xs={6}>
+              <Typography>Sub-total</Typography>
+            </Grid>
+            <Grid xs={6}>
+              <Typography>{`HKD$${subTotal}`}</Typography>
+            </Grid>
+            <Grid xs={6}>
+              <Typography>Shipping</Typography>
+            </Grid>
+            <Grid xs={6}>
+              <Typography>FREE</Typography>
+            </Grid> 
+            <Grid xs={12}>
+              <Divider sx={{ mb: "5px" }} />
+            </Grid>
+            <Grid xs={6}>
+              <Typography>Total</Typography>
+            </Grid>
+            <Grid xs={6}>
+              <Typography>{`HKD$${subTotal}`}</Typography>
+            </Grid>
+            <Grid xs={12}>
+              <Divider/>
+            </Grid>
+          </Grid>
         </CardContent>
         <CardActions sx={{ justifyContent: "center" }}>
           {subTotal > 0 ? (
