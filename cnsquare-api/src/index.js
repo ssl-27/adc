@@ -1,7 +1,8 @@
 const jsonServer = require("json-server");
 const auth = require("json-server-auth");
 const cors = require("cors");
-const database = require("./database/index");
+
+const database = require("./database");
 
 /**
  * An instance of express server created by json-server
@@ -18,18 +19,18 @@ const router = jsonServer.router(data);
 
 app.db = router.db;
 
-// Get default middleware
-
-const middlewares = jsonServer.defaults();
-
 // Configure the express server
 
 app.use(cors());
 app.use(auth);
-app.use(middlewares);
-app.use(router);
+
+// Use the middlewares
+
+app.use(jsonServer.defaults());
 
 // Start the server and listen to port 3000
+
+app.use(router);
 
 const port = process.env.PORT || 3000
 
