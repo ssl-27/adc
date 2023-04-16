@@ -48,9 +48,11 @@ export default function SignUp() {
       !data.get("email") ||
       !data.get("password") ||
       !data.get("firstName") ||
-      !data.get("lastName")
+      !data.get("lastName") ||
+      !data.get("userName")
     ) {
       setShouldShowAlert(true);
+      return;
     }
 
     const payload = {
@@ -58,6 +60,26 @@ export default function SignUp() {
       password: data.get("password"),
       firstName: data.get("firstName"),
       lastName: data.get("lastName"),
+      userName: data.get("userName"),
+
+      // populate default values
+      avatar: "",
+
+      address: "",
+      district: "",
+      city: "Hong Kong",
+      phoneNumber: "",
+
+      creditCardIssuer: "",
+      creditCardNumber: "",
+      creditCardExpiryDate: "",
+      creditCardCVV: "",
+
+      tier: 0,
+      points: 1000,
+      birthDate: "",
+
+      registeredAt: new Date().toISOString(),
     };
 
     cnAxios
@@ -128,6 +150,15 @@ export default function SignUp() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="userName"
+                  label="Username"
+                  name="userName"
                 />
               </Grid>
               <Grid item xs={12}>

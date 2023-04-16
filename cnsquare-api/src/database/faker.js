@@ -7,7 +7,10 @@ const config = require("../config/index");
  * @returns User
  */
 exports.createUser = (id) => {
-  const creditCardExpiryDate = `${faker.datatype.number({min: 1, max: 12}).toString().padStart(2, '0')}/${new Date(faker.date.future(5)).getFullYear()}`
+  const creditCardExpiryDate = `${faker.datatype
+    .number({ min: 1, max: 12 })
+    .toString()
+    .padStart(2, "0")}/${new Date(faker.date.future(5)).getFullYear()}`;
 
   return {
     id: id,
@@ -22,7 +25,9 @@ exports.createUser = (id) => {
 
     email: faker.internet.email(),
     address: faker.address.streetAddress(true),
-    district: ["Hong Kong Island", "Kowloon", "New Territories"][faker.datatype.number({min: 0, max: 2})],
+    district: ["Hong Kong Island", "Kowloon", "New Territories"][
+      faker.datatype.number({ min: 0, max: 2 })
+    ],
     city: "Hong Kong",
     phoneNumber: faker.phone.number("+852 #### ####"),
 
