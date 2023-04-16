@@ -2,14 +2,9 @@ import {
   Alert,
   Avatar,
   Box,
-  Breadcrumbs,
   Button,
-  Checkbox,
   Container,
-  FormControlLabel,
   LinearProgress,
-  Grid,
-  Link,
   TextField,
   Typography,
 } from "@mui/material";
@@ -42,7 +37,7 @@ function Profile() {
   const [tier, setTier] = useState(0);
   const [points, setPoints] = useState(0);
 
-  const { user } = useContext(UserContext);
+  const { user, pullUserInfo } = useContext(UserContext);
 
   useEffect(() => {
     getUserObject();
@@ -108,6 +103,7 @@ function Profile() {
       .then((res) => {
         setShouldShowSuccessAlert(true);
         setShouldShowErrorAlert(false);
+        pullUserInfo();
       })
       .catch((err) => {
         setShouldShowSuccessAlert(false);

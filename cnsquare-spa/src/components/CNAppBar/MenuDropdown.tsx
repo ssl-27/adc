@@ -10,33 +10,15 @@ import { Link } from "react-router-dom";
 import { SyntheticEvent, useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
-import cnAxios from "../../utils/cn-axios";
 import { Avatar } from "@mui/material";
 
 export default function MenuDropdown() {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLButtonElement>(null);
 
-  const [firstName, setFirstName] = useState("");
-  const [avatar, setAvatar] = useState("");
-
-  const { user } = useContext(UserContext);
-
-  useEffect(() => {
-    getUserObject();
-  }, []);
-
-  const getUserObject = () => {
-    cnAxios
-      .get(`/users/${user.id}`)
-      .then((res) => {
-        const data = res.data;
-
-        setFirstName(data.firstName);
-        setAvatar(data.avatar);
-      })
-      .catch((err) => console.log(err));
-  };
+  const { userInfo } = useContext(UserContext);
+  const firstName = userInfo === null ? "" : userInfo.firstName;
+  const avatar = userInfo === null ? "" : userInfo.avatar;
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);

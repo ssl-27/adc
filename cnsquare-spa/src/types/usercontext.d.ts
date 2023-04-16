@@ -4,6 +4,8 @@ type UserLoginInfo = {
 };
 type TUserContext = {
   user: UserLoginInfo;
+  userInfo: User | null;
   updateUser: (u: UserLoginInfo) => void;
   removeUser: () => void;
+  pullUserInfo: () => void;
 };

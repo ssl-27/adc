@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Toolbar, Typography } from "@mui/material";
 import LinkButton from "../LinkButton";
 import MenuDropdown from "./MenuDropdown";
 import { UserContext } from "../../contexts/UserContext";
