@@ -37,7 +37,10 @@ exports.createUser = (id) => {
     creditCardCVV: faker.finance.creditCardCVV(),
 
     tier: faker.datatype.number({ min: 0, max: 2 }), // 0: standard, 1: student, 2: vip
-    points: faker.datatype.number({ min: 100, max: 10000 }),
+    points:
+      this.tier == 2
+        ? faker.datatype.number({ min: 1000, max: 5000 })
+        : faker.datatype.number({ min: 0, max: 999 }),
     birthDate: faker.date.birthdate(),
 
     registeredAt: faker.date.past(),
