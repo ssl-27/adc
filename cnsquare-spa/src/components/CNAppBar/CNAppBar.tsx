@@ -29,7 +29,8 @@ function CNAppBar() {
       </Box>
     );
 
-  const handleNavCart = () => {
+  const handleNavCart = (event: any) => {
+    event.preventDefault();
     navigate("/cart");
   };
   
@@ -49,7 +50,7 @@ function CNAppBar() {
             badgeContent={cart === null ? 0 : cart.length}
             color={"secondary"}
           >
-            <IconButton color="inherit" onClick={handleNavCart}>
+            <IconButton color="inherit" onClick={(e) => handleNavCart(e)}>
               <ShoppingCartIcon />
             </IconButton>
           </Badge>
