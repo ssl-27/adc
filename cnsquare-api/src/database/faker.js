@@ -81,12 +81,14 @@ exports.createOrder = (id) => {
  * @returns Product
  */
 exports.createProduct = (id) => {
-  let prices = [];
+  let prices = [];      
+  let tprice = parseInt(faker.commerce.price());
   for (let i = 0; i < 3; i++) {
     prices.push({
       tier: i,
-      price: faker.commerce.price(),
-    });
+      price: tprice.toFixed(2),
+    });    
+    tprice = tprice * 0.8;
   }
 
   const types = ["writing_tools", "paper_products", "desk_accessories"];
