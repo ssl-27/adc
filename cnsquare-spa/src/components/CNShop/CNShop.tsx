@@ -11,7 +11,7 @@ function CNShop() {
   const userTier = userInfo === null ? 0 : userInfo.tier;
   const preprocess = (data: Product[]) => {
     return data.map((v) => {
-      const { id, name, type, brand, imageUrl, popularity, prices } = v;
+      const { id, name, type, brand, imageUrl, popularity, prices, size } = v;
       const price = prices[userTier].price;
       return {
         id,
@@ -22,6 +22,7 @@ function CNShop() {
         popularity,
         price,
         originalPrice: userTier !== 0 ? prices[0].price : undefined,
+        size,
       };
     });
   };

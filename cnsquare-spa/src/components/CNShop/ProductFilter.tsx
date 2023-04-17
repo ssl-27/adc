@@ -23,6 +23,12 @@ function ProductFilter(props) {
     false,
     false,
   ]);
+  const [sizeChecked, setSizeChecked] = useState<boolean[]>([
+    true,
+    false,
+    false,
+    false,
+  ]);
   const updatePriceRange = (event, newValue: number | number[]) => {
     setPriceRange(newValue as number[]);
   };
@@ -44,6 +50,24 @@ function ProductFilter(props) {
       }
     }
   };
+  const updateSizeChecked = (id: number, value: boolean) => {
+    if (id === 0) {
+      setSizeChecked([true, false, false, false]);
+    } else {
+      const temp = [...sizeChecked];
+      if (value) {
+        temp[0] = false;
+      }
+      temp[id] = value;
+      if (temp[1] && temp[2] && temp[3]) {
+        setSizeChecked([true, false, false, false]);
+      } else if (temp[1] || temp[2] || temp[3]) {
+        setSizeChecked(temp);
+      } else {
+        setSizeChecked([true, false, false, false]);
+      }
+    }
+  };
   // filter
   useEffect(() => {
     const lowerBound = priceRange[0] * 10;
@@ -54,9 +78,17 @@ function ProductFilter(props) {
     const ratingFiltered = ratingChecked[0]
       ? priceFiltered
       : priceFiltered.filter((v) => ratingChecked[v.popularity]);
+    const sizeFiltered = sizeChecked[0]
+      ? ratingFiltered
+      : ratingFiltered.filter(
+          (v) =>
+            (v.size === "small" && sizeChecked[1]) ||
+            (v.size === "medium" && sizeChecked[2]) ||
+            (v.size === "large" && sizeChecked[3])
+        );
     // TODO: add more filters
-    setPreviewInfo(ratingFiltered);
-  }, [priceRange, ratingChecked]);
+    setPreviewInfo(sizeFiltered);
+  }, [priceRange, ratingChecked, sizeChecked]);
   return (
     <Box sx={{ width: "250px", display: "inline-block" }}>
       <Accordion>
@@ -173,9 +205,50 @@ function ProductFilter(props) {
         </AccordionSummary>
         <AccordionDetails>
           <FormGroup>
-            <FormControlLabel control={<Checkbox />} label="Small" />
-            <FormControlLabel control={<Checkbox />} label="Medium" />
-            <FormControlLabel control={<Checkbox />} label="Large" />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={sizeChecked[0]}
+                  onChange={(event) =>
+                    updateSizeChecked(0, event.target.checked)
+                  }
+                />
+              }
+              label="All"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={sizeChecked[1]}
+                  onChange={(event) =>
+                    updateSizeChecked(1, event.target.checked)
+                  }
+                />
+              }
+              label="Small"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={sizeChecked[2]}
+                  onChange={(event) =>
+                    updateSizeChecked(2, event.target.checked)
+                  }
+                />
+              }
+              label="Medium"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={sizeChecked[3]}
+                  onChange={(event) =>
+                    updateSizeChecked(3, event.target.checked)
+                  }
+                />
+              }
+              label="Large"
+            />
           </FormGroup>
         </AccordionDetails>
       </Accordion>
