@@ -5,7 +5,6 @@ type Product = {
   description: string;
   imageUrl: string;
 
-  type: string;
   brand: string;
   popularity: number; // 0 - 5
 
@@ -15,4 +14,13 @@ type Product = {
       price: number;
     }
   ];
+
+  type: string;
+  feature: string;
+
+  color: string;
+  size: string;
+
+  outOfStock: boolean;
+  freeShipping: boolean;
 };

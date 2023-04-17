@@ -89,6 +89,12 @@ exports.createProduct = (id) => {
     });
   }
 
+  const types = ["writing_tools", "paper_products", "desk_accessories"];
+  const features = ["", "new", "hot"];
+
+  const colors = ["black", "silver", "gray", "white", "maroon", "red", "purple", "fuchsia", "green", "lime", "olive", "yellow", "navy", "blue", "teal", "aqua"]
+  const sizes = ["small", "medium", "large"];
+
   return {
     id: id,
 
@@ -96,11 +102,16 @@ exports.createProduct = (id) => {
     description: faker.commerce.productDescription(),
     imageUrl: faker.image.image(),
 
-    type: faker.commerce.department(),
     brand: faker.company.name(),
     popularity: faker.datatype.number({ min: 3, max: 5 }),
 
     prices: prices,
+    
+    type: types[faker.datatype.number({min: 0, max: 2})],
+    feature: features[faker.datatype.number({min: 0, max: 2})],
+
+    color: colors[faker.datatype.number({min: 0, max: 15})],
+    size: sizes[faker.datatype.number({min: 0, max: 2})],
   };
 };
 
