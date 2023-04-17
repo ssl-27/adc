@@ -49,9 +49,11 @@ const theme = createTheme();
 
 function Checkout() {
   const navigate = useNavigate();
-  const { user } = useContext(UserContext);
-  const [userData, setUserData] = useState<User | undefined>(undefined);
-  const cart = JSON.parse(window.localStorage.getItem("cart") as string);
+  const { user, userInfo, pullUserInfo } =
+    useContext(UserContext);
+  const cart = JSON.parse(
+    window.localStorage.getItem("cart") as string
+  ) as any[];
   useEffect(() => {
     if (user.id === null) {
       navigate("/login");
@@ -59,9 +61,6 @@ function Checkout() {
       if (cart.length === 0) {
         navigate("/cart");
       }
-      cnAxios.get(`/users/${user.id}`).then((res) => {
-        setUserData(res.data);
-      });
     }
   }, []);
   // From template:
@@ -84,18 +83,32 @@ function Checkout() {
           quantity: parseInt(v.quantity),
         };
       });
-      const payload = {
+      const newPoints =
+        cart.reduce<number>(
+          (prev, curr) => prev + curr.price * curr.quantity,
+          0
+        ) + (userInfo?.points as number);
+      const userPayload = {
+        userId: parseInt(user.id as string),
+        points: newPoints,
+        tier: newPoints > 1000 && userInfo?.tier === 0 ? 2 : userInfo?.tier,
+      };
+      const orderPayload = {
         userId: parseInt(user.id as string),
         items: items,
         parcelLocation: ["22.3448", "114.0747"],
         status: 0,
       };
-      cnAxios.post("/orders", payload);
-      window.localStorage.setItem("cart", JSON.stringify([]));
+      cnAxios.post("/orders", orderPayload).then(() => {
+        window.localStorage.setItem("cart", JSON.stringify([]));
+        cnAxios.patch(`/users/${user.id}`, userPayload).then(() => {
+          pullUserInfo();
+        });
+      });
     }
   }, [activeStep]);
 
-  if (userData === undefined) {
+  if (userInfo === null) {
     return <div></div>;
   }
 
@@ -133,7 +146,7 @@ function Checkout() {
             </Fragment>
           ) : (
             <Fragment>
-              {getStepContent(activeStep, userData as User)}
+              {getStepContent(activeStep, userInfo as User)}
               <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                 {activeStep !== 0 && (
                   <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>

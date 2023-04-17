@@ -9,6 +9,7 @@ import {
 import { useLoaderData } from "react-router-dom";
 import ProductInfo from "./ProductInfo";
 import ReviewSection from "./ReviewSection";
+import RecommendationBar from "../RecommendationBar";
 
 function ProductDetail() {
   const [productData, reviewData] = useLoaderData() as [Product, Comment[]];
@@ -34,6 +35,8 @@ function ProductDetail() {
         >
           <ProductInfo info={productData} />
           <ReviewSection reviews={reviewData} productId={productData.id} />
+          <RecommendationBar title={"You may also like: "} />
+          <RecommendationBar title={"From your wish list: "} />
         </CardContent>
       </Card>
     </Container>

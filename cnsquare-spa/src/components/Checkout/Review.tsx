@@ -4,6 +4,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
+import { Box, LinearProgress } from "@mui/material";
 
 export default function Review(props) {
   const { info } = props;
@@ -15,6 +16,7 @@ export default function Review(props) {
     city,
     creditCardNumber,
     creditCardExpiryDate,
+    points,
   } = info as User;
   const cart = JSON.parse(window.localStorage.getItem("cart") as string);
   const products = cart.map((v) => {
@@ -55,6 +57,34 @@ export default function Review(props) {
         </ListItem>
       </List>
       <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Typography variant="h6">Points Gained</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          {total + points > 1000 ? (
+            <LinearProgress variant="buffer" value={100} valueBuffer={0} />
+          ) : (
+            <LinearProgress
+              variant="buffer"
+              value={(points / 1000) * 100}
+              valueBuffer={(total / 1000) * 100}
+            />
+          )}
+        </Grid>
+        <Grid item xs={12}>
+          <Typography>{`Total points: ${points} + ${total} = ${
+            points + total
+          }`}</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          {total + points > 1000 ? (
+            <Typography>Your membership will upgrade to VIP!</Typography>
+          ) : (
+            <Typography>{`You need ${
+              1000 - total - points
+            } more points to upgrade to VIP!`}</Typography>
+          )}
+        </Grid>
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
             Shipping

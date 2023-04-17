@@ -4,15 +4,20 @@ import cnAxios from "../../utils/cn-axios";
 const UserContext = createContext<TUserContext>({
   user: { id: null, accessToken: null },
   userInfo: null,
+  cart: null,
   updateUser: () => {},
   removeUser: () => {},
   pullUserInfo: () => {},
+  pullCartInfo: () => {},
 });
 
 function UserContextProvider(props) {
   const userId = window.localStorage.getItem("userId");
   const accessToken = window.localStorage.getItem("token");
-  const userInfo = JSON.parse(window.localStorage.getItem("userInfo") as string);
+  const userInfo = JSON.parse(
+    window.localStorage.getItem("userInfo") as string
+  );
+  const cart = JSON.parse(window.localStorage.getItem("cart") as string);
 
   const updateUser = (u: UserLoginInfo) => {
     if (u.id !== null) {
@@ -41,18 +46,31 @@ function UserContextProvider(props) {
   const pullUserInfo = () => {
     if (userId !== null) {
       cnAxios.get(`/users/${userId}`).then((res) => {
-        setUser({ ...user, userInfo: res.data });
+        setUser({
+          ...user,
+          userInfo: res.data,
+          cart: JSON.parse(window.localStorage.getItem("cart") as string),
+        });
         window.localStorage.setItem("userInfo", JSON.stringify(res.data));
       });
     }
   };
 
+  const pullCartInfo = () => {
+    setUser({
+      ...user,
+      cart: JSON.parse(window.localStorage.getItem("cart") as string),
+    });
+  };
+
   const [user, setUser] = useState<TUserContext>({
     user: { id: userId, accessToken: accessToken },
-    userInfo: userInfo,
+    userInfo,
+    cart,
     updateUser,
     removeUser,
     pullUserInfo,
+    pullCartInfo,
   });
 
   return (

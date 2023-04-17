@@ -1,4 +1,12 @@
-import { AppBar, Box, Toolbar, Typography } from "@mui/material";
+import {
+  AppBar,
+  Badge,
+  Box,
+  IconButton,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LinkButton from "../LinkButton";
 import MenuDropdown from "./MenuDropdown";
 import { UserContext } from "../../contexts/UserContext";
@@ -6,7 +14,7 @@ import { useContext } from "react";
 import MemberInfo from "./MemberInfo";
 
 function CNAppBar() {
-  const { user } = useContext(UserContext);
+  const { user, cart } = useContext(UserContext);
   const AccountButton =
     user.id === null ? (
       <LinkButton color="inherit" href="/login" label="Login" />
@@ -28,7 +36,14 @@ function CNAppBar() {
         </Box>
         <Box sx={{ display: "flex" }}>
           {AccountButton}
-          <LinkButton color="inherit" href="/cart" label="My Cart" />
+          <Badge
+            badgeContent={cart === null ? 0 : cart.length}
+            color={"secondary"}
+          >
+            <IconButton color="inherit" href="/cart">
+              <ShoppingCartIcon />
+            </IconButton>
+          </Badge>
         </Box>
       </Toolbar>
     </AppBar>

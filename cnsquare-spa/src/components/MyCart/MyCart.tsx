@@ -4,19 +4,21 @@ import {
   Card,
   CardActions,
   CardContent,
-  Container,
   Divider,
   Grid,
   Typography,
 } from "@mui/material";
 import ProductCartCard from "./ProductCartCard";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useContext, useEffect, useState } from "react";
 import LinkButton from "../LinkButton";
+import { UserContext } from "../../contexts/UserContext";
+import RecommendationBar from "../RecommendationBar";
 
 function MyCart() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [cartComponents, setCartComponents] = useState<ReactElement[]>([]);
   const [subTotal, setSubTotal] = useState<number>(0);
+  const { pullCartInfo } = useContext(UserContext);
   // check localstorage and update cart
   useEffect(() => {
     const storedCart = JSON.parse(
@@ -30,6 +32,7 @@ function MyCart() {
     const newCart = cart.filter((v) => v.id !== id);
     window.localStorage.setItem("cart", JSON.stringify(newCart));
     setCart(newCart);
+    pullCartInfo();
   };
   const updateQuantity = (id: number, quantity: number) => {
     // Need to create new array to fire the useEffect after setCart
@@ -40,6 +43,7 @@ function MyCart() {
     newCart.splice(i, 0, cartItem);
     window.localStorage.setItem("cart", JSON.stringify(newCart));
     setCart(newCart);
+    pullCartInfo();
   };
   useEffect(() => {
     setCartComponents(
@@ -57,84 +61,90 @@ function MyCart() {
     );
   }, [cart]);
   return (
-    <Container
-      sx={{
-        display: "flex",
-        flexDirection: "row",
-        gap: "30px",
-        alignItems: "flex-start",
-        justifyContent: "center",
-      }}
-    >
-      <Card>
-        <CardContent>
-          <Typography variant="h6" textAlign={"center"}>
-            My Cart
-          </Typography>
-          <Divider sx={{ mb: "5px" }} />
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "10px",
-              minWidth: "250px",
-              minHeight: "200px",
-            }}
-          >
-            {cartComponents.length === 0 ? (
-              <Typography textAlign={"center"}>Cart is empty.</Typography>
+    <Grid container justifyContent={"center"} gap={"30px"}>
+      <Grid>
+        <Card>
+          <CardContent>
+            <Typography variant="h6" textAlign={"center"}>
+              My Cart
+            </Typography>
+            <Divider sx={{ mb: "5px" }} />
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+                minWidth: "250px",
+                minHeight: "200px",
+              }}
+            >
+              {cartComponents.length === 0 ? (
+                <Typography textAlign={"center"}>Cart is empty.</Typography>
+              ) : (
+                cartComponents
+              )}
+            </Box>
+          </CardContent>
+        </Card>
+      </Grid>
+      <Grid>
+        <Card>
+          <CardContent>
+            <Grid container width={"250px"}>
+              <Grid xs={12}>
+                <Typography variant="h6" textAlign={"center"}>
+                  Order Summary
+                </Typography>
+              </Grid>
+              <Grid xs={12}>
+                <Divider sx={{ mb: "5px" }} />
+              </Grid>
+              <Grid xs={6}>
+                <Typography>Sub-total</Typography>
+              </Grid>
+              <Grid xs={6}>
+                <Typography>{`HKD$${subTotal}`}</Typography>
+              </Grid>
+              <Grid xs={6}>
+                <Typography>Shipping</Typography>
+              </Grid>
+              <Grid xs={6}>
+                <Typography>FREE</Typography>
+              </Grid>
+              <Grid xs={12}>
+                <Divider sx={{ mb: "5px" }} />
+              </Grid>
+              <Grid xs={6}>
+                <Typography>Total</Typography>
+              </Grid>
+              <Grid xs={6}>
+                <Typography>{`HKD$${subTotal}`}</Typography>
+              </Grid>
+              <Grid xs={12}>
+                <Divider />
+              </Grid>
+            </Grid>
+          </CardContent>
+          <CardActions sx={{ justifyContent: "center" }}>
+            {subTotal > 0 ? (
+              <LinkButton
+                color={undefined}
+                href="/checkout"
+                label="Check Out"
+              />
             ) : (
-              cartComponents
+              <Button disabled>Check Out</Button>
             )}
-          </Box>
-        </CardContent>
-      </Card>
-      <Card>
-        <CardContent>
-          <Grid container width={"250px"}>
-            <Grid xs={12}>
-              <Typography variant="h6" textAlign={"center"}>
-                Order Summary
-              </Typography>
-            </Grid>
-            <Grid xs={12}>
-              <Divider sx={{ mb: "5px" }} />
-            </Grid>
-            <Grid xs={6}>
-              <Typography>Sub-total</Typography>
-            </Grid>
-            <Grid xs={6}>
-              <Typography>{`HKD$${subTotal}`}</Typography>
-            </Grid>
-            <Grid xs={6}>
-              <Typography>Shipping</Typography>
-            </Grid>
-            <Grid xs={6}>
-              <Typography>FREE</Typography>
-            </Grid>
-            <Grid xs={12}>
-              <Divider sx={{ mb: "5px" }} />
-            </Grid>
-            <Grid xs={6}>
-              <Typography>Total</Typography>
-            </Grid>
-            <Grid xs={6}>
-              <Typography>{`HKD$${subTotal}`}</Typography>
-            </Grid>
-            <Grid xs={12}>
-              <Divider />
-            </Grid>
-          </Grid>
-        </CardContent>
-        <CardActions sx={{ justifyContent: "center" }}>
-          {subTotal > 0 ? (
-            <LinkButton color={undefined} href="/checkout" label="Check Out" />
-          ) : (
-            <Button disabled>Check Out</Button>
-          )}
-        </CardActions>
-      </Card>
-    </Container>
+          </CardActions>
+        </Card>
+      </Grid>
+      <Grid xs={9} maxWidth={"250px"}>
+        <RecommendationBar title="You may also like:" />
+      </Grid>
+      <Grid xs={9}>
+        <RecommendationBar title="From your wish list:" />
+      </Grid>
+    </Grid>
   );
 }
 export default MyCart;

@@ -1,18 +1,22 @@
-import { Card, CardContent, Typography } from "@mui/material";
-import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Card, CardContent, Rating, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function ProductCard(props) {
-  const { id, name, price, imageUrl } = props;
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const navigate = useNavigate();
+  const { info } = props;
+  const { id, name, price, imageUrl, brand, popularity } = info;
+  const handleOpen = () => {
+    window.scrollTo(0, 0);
+    navigate(`/product/${id}`);
+  };
   return (
     <div>
-      {open && <Navigate to={`/product/${id}`} replace={true} />}
       <Card onClick={handleOpen} sx={{ cursor: "pointer", maxWidth: "200px" }}>
         <img src={imageUrl} loading="lazy" width="200px" />
         <CardContent>
+          <Typography fontWeight={"bold"}>{brand}</Typography>
           <Typography>{name}</Typography>
+          <Rating name="size-medium" defaultValue={popularity} readOnly />
           <Typography>HK${price}</Typography>
         </CardContent>
       </Card>

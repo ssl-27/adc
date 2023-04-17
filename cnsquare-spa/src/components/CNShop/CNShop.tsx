@@ -2,15 +2,17 @@ import { Box, Breadcrumbs, Container, Link, Typography } from "@mui/material";
 import Catalogue from "./Catalogue";
 import ProductFilter from "./ProductFilter";
 import { useLoaderData } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
 function CNShop() {
   const data = useLoaderData() as Product[];
-  // TODO: show different price tiers?
+  const { userInfo } = useContext(UserContext);
+  const userTier = userInfo === null ? 0 : userInfo.tier;
   const preprocess = (data: Product[]) => {
     return data.map((v) => {
       const { id, name, type, brand, imageUrl, popularity, prices } = v;
-      const price = prices[0].price;
+      const price = prices[userTier].price;
       return {
         id,
         name,
@@ -19,6 +21,7 @@ function CNShop() {
         imageUrl,
         popularity,
         price,
+        discounted: userTier !== 0,
       };
     });
   };

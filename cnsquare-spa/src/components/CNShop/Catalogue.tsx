@@ -4,15 +4,7 @@ import ProductCard from "./ProductCard";
 function Catalogue(props) {
   const { info } = props;
   const productCards = info.map((v) => {
-    return (
-      <ProductCard
-        key={v.id}
-        id={v.id}
-        name={v.name}
-        price={v.price}
-        imageUrl={v.imageUrl}
-      ></ProductCard>
-    );
+    return <ProductCard key={v.id} info={v}></ProductCard>;
   });
   return (
     <Box>

@@ -12,12 +12,14 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
 function ProductInfo(props) {
   const { info } = props;
   const { id, name, description, prices, imageUrl } = info;
   const [quantity, setQuantity] = useState(1);
+  const { pullCartInfo } = useContext(UserContext);
   const updateCount = (event) => {
     setQuantity(event.target.value);
   };
@@ -43,6 +45,7 @@ function ProductInfo(props) {
     } else {
       window.localStorage.setItem("cart", JSON.stringify([cartItem]));
     }
+    pullCartInfo();
   };
   return (
     <Card>
@@ -73,13 +76,13 @@ function ProductInfo(props) {
           <Grid xs={4}>
             <List subheader={<ListSubheader>Prices</ListSubheader>}>
               <ListItem>
-                <ListItemText primary={`normal user: HKD$${prices[0].price}`} />
+                <ListItemText primary={`member: HKD$${prices[0].price}`} />
               </ListItem>
               <ListItem>
-                <ListItemText primary={`vip: HKD$${prices[1].price}`} />
+                <ListItemText primary={`student: HKD$${prices[1].price}`} />
               </ListItem>
               <ListItem>
-                <ListItemText primary={`vipp: HKD$${prices[2].price}`} />
+                <ListItemText primary={`vip: HKD$${prices[2].price}`} />
               </ListItem>
             </List>
             <Box
