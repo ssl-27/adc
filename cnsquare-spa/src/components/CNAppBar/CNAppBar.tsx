@@ -12,9 +12,13 @@ import MenuDropdown from "./MenuDropdown";
 import { UserContext } from "../../contexts/UserContext";
 import { useContext } from "react";
 import MemberInfo from "./MemberInfo";
+import { useNavigate } from "react-router-dom";
 
 function CNAppBar() {
   const { user, cart } = useContext(UserContext);
+
+  const navigate = useNavigate();
+
   const AccountButton =
     user.id === null ? (
       <LinkButton color="inherit" href="/login" label="Login" />
@@ -24,6 +28,11 @@ function CNAppBar() {
         <MenuDropdown />
       </Box>
     );
+
+  const handleNavCart = () => {
+    navigate("/cart");
+  };
+  
   return (
     <AppBar>
       <Toolbar>
@@ -40,7 +49,7 @@ function CNAppBar() {
             badgeContent={cart === null ? 0 : cart.length}
             color={"secondary"}
           >
-            <IconButton color="inherit" href="/cart">
+            <IconButton color="inherit" onClick={handleNavCart}>
               <ShoppingCartIcon />
             </IconButton>
           </Badge>
