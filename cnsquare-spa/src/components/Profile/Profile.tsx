@@ -37,7 +37,7 @@ function Profile() {
   const [tier, setTier] = useState(0);
   const [points, setPoints] = useState(0);
 
-  const { user, pullUserInfo } = useContext(UserContext);
+  const { user, syncInfo } = useContext(UserContext);
 
   useEffect(() => {
     getUserObject();
@@ -103,7 +103,7 @@ function Profile() {
       .then((res) => {
         setShouldShowSuccessAlert(true);
         setShouldShowErrorAlert(false);
-        pullUserInfo();
+        syncInfo();
       })
       .catch((err) => {
         setShouldShowSuccessAlert(false);

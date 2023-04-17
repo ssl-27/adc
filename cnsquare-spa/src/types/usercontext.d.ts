@@ -8,6 +8,5 @@ type TUserContext = {
   cart: CartItem[] | null;
   updateUser: (u: UserLoginInfo) => void;
   removeUser: () => void;
-  pullUserInfo: () => void;
-  pullCartInfo: () => void;
+  syncInfo: () => void;
 };

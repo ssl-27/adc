@@ -19,7 +19,7 @@ function ProductInfo(props) {
   const { info } = props;
   const { id, name, description, prices, imageUrl, brand } = info;
   const [quantity, setQuantity] = useState(1);
-  const { userInfo, pullCartInfo } = useContext(UserContext);
+  const { userInfo, syncInfo } = useContext(UserContext);
   const updateCount = (event) => {
     setQuantity(event.target.value);
   };
@@ -48,7 +48,7 @@ function ProductInfo(props) {
     } else {
       window.localStorage.setItem("cart", JSON.stringify([cartItem]));
     }
-    pullCartInfo();
+    syncInfo();
   };
   return (
     <Card>

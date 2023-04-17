@@ -7,8 +7,7 @@ const UserContext = createContext<TUserContext>({
   cart: null,
   updateUser: () => {},
   removeUser: () => {},
-  pullUserInfo: () => {},
-  pullCartInfo: () => {},
+  syncInfo: () => {},
 });
 
 function UserContextProvider(props) {
@@ -43,11 +42,15 @@ function UserContextProvider(props) {
     window.localStorage.removeItem("userInfo");
   };
 
-  const pullUserInfo = () => {
+  const syncInfo = () => {
     if (userId !== null) {
       cnAxios.get(`/users/${userId}`).then((res) => {
         setUser({
           ...user,
+          user: {
+            id: window.localStorage.getItem("userId"),
+            accessToken: window.localStorage.getItem("token"),
+          },
           userInfo: res.data,
           cart: JSON.parse(window.localStorage.getItem("cart") as string),
         });
@@ -56,21 +59,13 @@ function UserContextProvider(props) {
     }
   };
 
-  const pullCartInfo = () => {
-    setUser({
-      ...user,
-      cart: JSON.parse(window.localStorage.getItem("cart") as string),
-    });
-  };
-
   const [user, setUser] = useState<TUserContext>({
     user: { id: userId, accessToken: accessToken },
     userInfo,
     cart,
     updateUser,
     removeUser,
-    pullUserInfo,
-    pullCartInfo,
+    syncInfo,
   });
 
   return (

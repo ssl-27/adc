@@ -49,7 +49,7 @@ const theme = createTheme();
 
 function Checkout() {
   const navigate = useNavigate();
-  const { user, userInfo, pullUserInfo } = useContext(UserContext);
+  const { user, userInfo, syncInfo } = useContext(UserContext);
   const cart = JSON.parse(
     window.localStorage.getItem("cart") as string
   ) as any[];
@@ -101,7 +101,7 @@ function Checkout() {
       cnAxios.post("/orders", orderPayload).then(() => {
         window.localStorage.setItem("cart", JSON.stringify([]));
         cnAxios.patch(`/users/${user.id}`, userPayload).then(() => {
-          pullUserInfo();
+          syncInfo();
         });
       });
     }

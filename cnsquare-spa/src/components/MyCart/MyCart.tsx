@@ -20,7 +20,7 @@ function MyCart() {
   const [originalTotal, setOriginalTotal] = useState<number>(0);
   const [discount, setDiscount] = useState<number>(0);
   const [subTotal, setSubTotal] = useState<number>(0);
-  const { userInfo, pullCartInfo } = useContext(UserContext);
+  const { userInfo, syncInfo } = useContext(UserContext);
   // check localstorage and update cart
   useEffect(() => {
     const storedCart = JSON.parse(
@@ -34,7 +34,7 @@ function MyCart() {
     const newCart = cart.filter((v) => v.id !== id);
     window.localStorage.setItem("cart", JSON.stringify(newCart));
     setCart(newCart);
-    pullCartInfo();
+    syncInfo();
   };
   const updateQuantity = (id: number, quantity: number) => {
     // Need to create new array to fire the useEffect after setCart
@@ -45,7 +45,7 @@ function MyCart() {
     newCart.splice(i, 0, cartItem);
     window.localStorage.setItem("cart", JSON.stringify(newCart));
     setCart(newCart);
-    pullCartInfo();
+    syncInfo();
   };
   useEffect(() => {
     setCartComponents(

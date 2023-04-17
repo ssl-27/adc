@@ -33,7 +33,7 @@ function CNAppBar() {
     event.preventDefault();
     navigate("/cart");
   };
-  
+
   return (
     <AppBar>
       <Toolbar>
