@@ -29,6 +29,12 @@ function ProductFilter(props) {
     false,
     false,
   ]);
+  const [categoryChecked, setCategoryChecked] = useState<boolean[]>([
+    true,
+    false,
+    false,
+    false,
+  ]);
   const updatePriceRange = (event, newValue: number | number[]) => {
     setPriceRange(newValue as number[]);
   };
@@ -68,6 +74,24 @@ function ProductFilter(props) {
       }
     }
   };
+  const updateCategoryChecked = (id: number, value: boolean) => {
+    if (id === 0) {
+      setCategoryChecked([true, false, false, false]);
+    } else {
+      const temp = [...categoryChecked];
+      if (value) {
+        temp[0] = false;
+      }
+      temp[id] = value;
+      if (temp[1] && temp[2] && temp[3]) {
+        setCategoryChecked([true, false, false, false]);
+      } else if (temp[1] || temp[2] || temp[3]) {
+        setCategoryChecked(temp);
+      } else {
+        setCategoryChecked([true, false, false, false]);
+      }
+    }
+  };
   // filter
   useEffect(() => {
     const lowerBound = priceRange[0] * 10;
@@ -86,9 +110,17 @@ function ProductFilter(props) {
             (v.size === "medium" && sizeChecked[2]) ||
             (v.size === "large" && sizeChecked[3])
         );
+    const categoryFiltered = categoryChecked[0]
+      ? sizeFiltered
+      : sizeFiltered.filter(
+          (v) =>
+            (v.type === "writing_tools" && categoryChecked[1]) ||
+            (v.type === "paper_products" && categoryChecked[2]) ||
+            (v.type === "desk_accessories" && categoryChecked[3])
+        );
     // TODO: add more filters
-    setPreviewInfo(sizeFiltered);
-  }, [priceRange, ratingChecked, sizeChecked]);
+    setPreviewInfo(categoryFiltered);
+  }, [priceRange, ratingChecked, sizeChecked, categoryChecked]);
   return (
     <Box sx={{ width: "250px", display: "inline-block" }}>
       <Accordion>
@@ -98,14 +130,49 @@ function ProductFilter(props) {
         <AccordionDetails>
           <FormGroup>
             <FormControlLabel
-              control={<Checkbox defaultChecked />}
+              control={
+                <Checkbox
+                  checked={categoryChecked[0]}
+                  onChange={(event) =>
+                    updateCategoryChecked(0, event.target.checked)
+                  }
+                />
+              }
               label="All"
             />
-            <FormControlLabel control={<Checkbox />} label="Feature Products" />
-            <FormControlLabel control={<Checkbox />} label="Writing Tools" />
-            <FormControlLabel control={<Checkbox />} label="Paper Products" />
-            <FormControlLabel control={<Checkbox />} label="Desk Accessories" />
-            <FormControlLabel control={<Checkbox />} label="Others" />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={categoryChecked[1]}
+                  onChange={(event) =>
+                    updateCategoryChecked(1, event.target.checked)
+                  }
+                />
+              }
+              label="Writing Tools"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={categoryChecked[2]}
+                  onChange={(event) =>
+                    updateCategoryChecked(2, event.target.checked)
+                  }
+                />
+              }
+              label="Paper Products"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={categoryChecked[3]}
+                  onChange={(event) =>
+                    updateCategoryChecked(3, event.target.checked)
+                  }
+                />
+              }
+              label="Desk Accessories"
+            />
           </FormGroup>
         </AccordionDetails>
       </Accordion>
