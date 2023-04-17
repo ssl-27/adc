@@ -9,7 +9,13 @@ import {
   Typography,
 } from "@mui/material";
 import ProductCartCard from "./ProductCartCard";
-import { ReactElement, useContext, useEffect, useState } from "react";
+import {
+  ReactElement,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import LinkButton from "../LinkButton";
 import { UserContext } from "../../contexts/UserContext";
 import RecommendationBar from "../RecommendationBar";
@@ -30,13 +36,13 @@ function MyCart() {
       setCart(storedCart);
     }
   }, []);
-  const removeCartItemByIndex = (id: number) => {
+  const removeCartItemByIndex = useCallback((id: number) => {
     const newCart = cart.filter((v) => v.id !== id);
     window.localStorage.setItem("cart", JSON.stringify(newCart));
     setCart(newCart);
     syncInfo();
-  };
-  const updateQuantity = (id: number, quantity: number) => {
+  }, []);
+  const updateQuantity = useCallback((id: number, quantity: number) => {
     // Need to create new array to fire the useEffect after setCart
     const i = cart.findIndex((v) => v.id === id);
     const newCart = cart.filter((v) => v.id !== id);
@@ -46,7 +52,7 @@ function MyCart() {
     window.localStorage.setItem("cart", JSON.stringify(newCart));
     setCart(newCart);
     syncInfo();
-  };
+  }, []);
   useEffect(() => {
     setCartComponents(
       cart.map((v) => (

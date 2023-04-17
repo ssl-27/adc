@@ -56,6 +56,11 @@ function UserContextProvider(props) {
         });
         window.localStorage.setItem("userInfo", JSON.stringify(res.data));
       });
+    } else {
+      setUser({
+        ...user,
+        cart: JSON.parse(window.localStorage.getItem("cart") as string),
+      });
     }
   };
 

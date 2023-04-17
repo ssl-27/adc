@@ -12,7 +12,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useContext, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 
 function ProductInfo(props) {
@@ -23,7 +23,7 @@ function ProductInfo(props) {
   const updateCount = (event) => {
     setQuantity(event.target.value);
   };
-  const updateCart = (event) => {
+  const updateCart = useCallback((event) => {
     const tier = userInfo === null ? 0 : userInfo.tier;
     const cartItem: CartItem = {
       id: id,
@@ -49,7 +49,7 @@ function ProductInfo(props) {
       window.localStorage.setItem("cart", JSON.stringify([cartItem]));
     }
     syncInfo();
-  };
+  }, []);
   return (
     <Card>
       <CardContent>

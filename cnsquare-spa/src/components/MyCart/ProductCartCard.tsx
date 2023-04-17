@@ -15,7 +15,7 @@ function ProductCartCard(props) {
   return (
     <Card>
       <CardContent sx={{ display: "flex", flexDirection: "row", gap: "10px" }}>
-        <Box>
+        <Box width="200px">
           <img src={imageUrl} loading="lazy" width="200px" />
           <Typography fontWeight={"bold"}>{brand}</Typography>
           <Typography>{name}</Typography>
