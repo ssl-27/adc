@@ -18,7 +18,7 @@ type Product = {
   type: string;
   feature: string;
 
-  color: string;
+  colors: string;
   size: string;
 
   outOfStock: boolean;

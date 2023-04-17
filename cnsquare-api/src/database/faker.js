@@ -73,6 +73,8 @@ exports.createOrder = (id) => {
     parcelLocation: faker.address.nearbyGPSCoordinate([22.3193, 114.1694]),
 
     status: faker.datatype.number({ min: 0, max: 2 }), // 0: preparing, 1: shipping 2: fulfilled
+    
+    createdAt: faker.date.past(),
   };
 };
 
@@ -80,22 +82,28 @@ exports.createOrder = (id) => {
  * Create a Product Object with fake data
  * @returns Product
  */
-exports.createProduct = (id) => {
+exports.createProduct = (id) => {  
+  const typeList = ["writing_tools", "paper_products", "desk_accessories"];
+  const featureList = ["", "new", "hot"];
+
+  const colorList = ["black", "silver", "gray", "white", "maroon", "red", "purple", "fuchsia", "green", "lime", "olive", "yellow", "navy", "blue", "teal", "aqua"]
+  const sizeList = ["small", "medium", "large"];
+
   let prices = [];      
   let tprice = parseInt(faker.commerce.price());
   for (let i = 0; i < 3; i++) {
     prices.push({
       tier: i,
-      price: tprice.toFixed(2),
+      price: tprice.toFixed(0),
     });    
     tprice = tprice * 0.8;
   }
 
-  const types = ["writing_tools", "paper_products", "desk_accessories"];
-  const features = ["", "new", "hot"];
-
-  const colors = ["black", "silver", "gray", "white", "maroon", "red", "purple", "fuchsia", "green", "lime", "olive", "yellow", "navy", "blue", "teal", "aqua"]
-  const sizes = ["small", "medium", "large"];
+  let colors = [];
+  for (let i = 0; i < faker.datatype.number({min: 3, max: 8}); i++) {
+    colors.push(colorList[faker.datatype.number({min: 0, max: 15})]);
+  }
+  colors = [...new Set(colors)];
 
   return {
     id: id,
@@ -109,11 +117,14 @@ exports.createProduct = (id) => {
 
     prices: prices,
     
-    type: types[faker.datatype.number({min: 0, max: 2})],
-    feature: features[faker.datatype.number({min: 0, max: 2})],
+    type: typeList[faker.datatype.number({min: 0, max: 2})],
+    feature: featureList[faker.datatype.number({min: 0, max: 2})],
 
-    color: colors[faker.datatype.number({min: 0, max: 15})],
-    size: sizes[faker.datatype.number({min: 0, max: 2})],
+    colors: colors,
+    size: sizeList[faker.datatype.number({min: 0, max: 2})],
+
+    outOfStock: faker.datatype.boolean() && faker.datatype.boolean(), // decrease chances
+    freeShipping: faker.datatype.boolean(),
   };
 };
 
