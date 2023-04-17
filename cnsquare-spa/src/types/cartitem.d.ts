@@ -3,5 +3,7 @@ type CartItem = {
   name: string;
   imageUrl: string;
   quantity: number;
-  price: number; // TODO: different prices for different tiers
+  price: number;
+  originalPrice: number | undefined;
+  brand: string;
 };

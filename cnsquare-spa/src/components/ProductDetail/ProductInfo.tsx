@@ -17,19 +17,22 @@ import { UserContext } from "../../contexts/UserContext";
 
 function ProductInfo(props) {
   const { info } = props;
-  const { id, name, description, prices, imageUrl } = info;
+  const { id, name, description, prices, imageUrl, brand } = info;
   const [quantity, setQuantity] = useState(1);
-  const { pullCartInfo } = useContext(UserContext);
+  const { userInfo, pullCartInfo } = useContext(UserContext);
   const updateCount = (event) => {
     setQuantity(event.target.value);
   };
   const updateCart = (event) => {
+    const tier = userInfo === null ? 0 : userInfo.tier;
     const cartItem: CartItem = {
       id: id,
       name: name,
       imageUrl: imageUrl,
-      price: prices[0].price, // TODO: determine price
+      price: prices[tier].price,
       quantity: quantity,
+      originalPrice: tier !== 0 ? prices[0].price : undefined,
+      brand: brand,
     };
     const storedCart = JSON.parse(
       window.localStorage.getItem("cart") as string

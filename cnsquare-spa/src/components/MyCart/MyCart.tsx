@@ -17,8 +17,10 @@ import RecommendationBar from "../RecommendationBar";
 function MyCart() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [cartComponents, setCartComponents] = useState<ReactElement[]>([]);
+  const [originalTotal, setOriginalTotal] = useState<number>(0);
+  const [discount, setDiscount] = useState<number>(0);
   const [subTotal, setSubTotal] = useState<number>(0);
-  const { pullCartInfo } = useContext(UserContext);
+  const { userInfo, pullCartInfo } = useContext(UserContext);
   // check localstorage and update cart
   useEffect(() => {
     const storedCart = JSON.parse(
@@ -59,10 +61,24 @@ function MyCart() {
     setSubTotal(
       cart.reduce<number>((prev, curr) => prev + curr.price * curr.quantity, 0)
     );
+    if (userInfo?.tier !== 0) {
+      setOriginalTotal(
+        cart.reduce<number>(
+          (prev, curr) =>
+            prev + (curr?.originalPrice as number) * curr.quantity,
+          0
+        )
+      );
+    }
   }, [cart]);
+
+  useEffect(() => {
+    setDiscount(subTotal - originalTotal);
+  }, [originalTotal, subTotal]);
+
   return (
     <Grid container justifyContent={"center"} gap={"30px"}>
-      <Grid>
+      <Grid item>
         <Card>
           <CardContent>
             <Typography variant="h6" textAlign={"center"}>
@@ -87,40 +103,63 @@ function MyCart() {
           </CardContent>
         </Card>
       </Grid>
-      <Grid>
+      <Grid item>
         <Card>
           <CardContent>
-            <Grid container width={"250px"}>
-              <Grid xs={12}>
+            <Grid container item width={"250px"}>
+              <Grid item xs={12}>
                 <Typography variant="h6" textAlign={"center"}>
                   Order Summary
                 </Typography>
               </Grid>
-              <Grid xs={12}>
+              <Grid item xs={12}>
                 <Divider sx={{ mb: "5px" }} />
               </Grid>
-              <Grid xs={6}>
+              {userInfo?.tier !== 0 && cart.length > 0 && (
+                <>
+                  <Grid item xs={6}>
+                    <Typography>Original Total</Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography>{`HKD$${originalTotal}`}</Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography>Discount</Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography>{`-HKD$${Math.abs(discount)}`}</Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Divider sx={{ mb: "5px" }} />
+                  </Grid>
+                </>
+              )}
+              <Grid item xs={6}>
                 <Typography>Sub-total</Typography>
               </Grid>
-              <Grid xs={6}>
+              <Grid item xs={6}>
                 <Typography>{`HKD$${subTotal}`}</Typography>
               </Grid>
-              <Grid xs={6}>
-                <Typography>Shipping</Typography>
-              </Grid>
-              <Grid xs={6}>
-                <Typography>FREE</Typography>
-              </Grid>
-              <Grid xs={12}>
+              {cart.length > 0 && (
+                <>
+                  <Grid item xs={6}>
+                    <Typography>Shipping</Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography>FREE</Typography>
+                  </Grid>
+                </>
+              )}
+              <Grid item xs={12}>
                 <Divider sx={{ mb: "5px" }} />
               </Grid>
-              <Grid xs={6}>
+              <Grid item xs={6}>
                 <Typography>Total</Typography>
               </Grid>
-              <Grid xs={6}>
+              <Grid item xs={6}>
                 <Typography>{`HKD$${subTotal}`}</Typography>
               </Grid>
-              <Grid xs={12}>
+              <Grid item xs={12}>
                 <Divider />
               </Grid>
             </Grid>
@@ -138,10 +177,10 @@ function MyCart() {
           </CardActions>
         </Card>
       </Grid>
-      <Grid xs={9} maxWidth={"250px"}>
+      <Grid xs={9} maxWidth={"250px"} item>
         <RecommendationBar title="You may also like:" />
       </Grid>
-      <Grid xs={9}>
+      <Grid xs={9} item>
         <RecommendationBar title="From your wish list:" />
       </Grid>
     </Grid>

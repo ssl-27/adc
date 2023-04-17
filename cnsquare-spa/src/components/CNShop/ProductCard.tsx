@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 function ProductCard(props) {
   const navigate = useNavigate();
   const { info } = props;
-  const { id, name, price, imageUrl, brand, popularity } = info;
+  const { id, name, price, imageUrl, brand, popularity, originalPrice } = info;
   const handleOpen = () => {
     window.scrollTo(0, 0);
     navigate(`/product/${id}`);
@@ -17,6 +17,13 @@ function ProductCard(props) {
           <Typography fontWeight={"bold"}>{brand}</Typography>
           <Typography>{name}</Typography>
           <Rating name="size-medium" defaultValue={popularity} readOnly />
+          {originalPrice !== undefined && (
+            <Typography
+              sx={{ textDecoration: "line-through", fontSize: "12px" }}
+            >
+              HK${originalPrice}
+            </Typography>
+          )}
           <Typography>HK${price}</Typography>
         </CardContent>
       </Card>

@@ -49,8 +49,7 @@ const theme = createTheme();
 
 function Checkout() {
   const navigate = useNavigate();
-  const { user, userInfo, pullUserInfo } =
-    useContext(UserContext);
+  const { user, userInfo, pullUserInfo } = useContext(UserContext);
   const cart = JSON.parse(
     window.localStorage.getItem("cart") as string
   ) as any[];

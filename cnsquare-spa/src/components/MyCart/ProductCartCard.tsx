@@ -10,13 +10,22 @@ import CancelIcon from "@mui/icons-material/Cancel";
 
 function ProductCartCard(props) {
   const { info, removeItem, updateCount } = props;
-  const { id, name, imageUrl, price, quantity } = info as CartItem;
+  const { id, name, imageUrl, price, quantity, brand, originalPrice } =
+    info as CartItem;
   return (
     <Card>
       <CardContent sx={{ display: "flex", flexDirection: "row", gap: "10px" }}>
         <Box>
           <img src={imageUrl} loading="lazy" width="200px" />
+          <Typography fontWeight={"bold"}>{brand}</Typography>
           <Typography>{name}</Typography>
+          {originalPrice !== undefined && (
+            <Typography
+              sx={{ textDecoration: "line-through", fontSize: "12px" }}
+            >
+              HK${originalPrice}
+            </Typography>
+          )}
           <Typography>{`HK$${price}`}</Typography>
         </Box>
         <Box>

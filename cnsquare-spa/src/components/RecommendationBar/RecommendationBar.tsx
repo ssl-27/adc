@@ -21,7 +21,7 @@ function RecommendationBar(props) {
         imageUrl,
         popularity,
         price,
-        discounted: userTier !== 0,
+        originalPrice: userTier !== 0 ? prices[0].price : undefined,
       };
     });
   };
