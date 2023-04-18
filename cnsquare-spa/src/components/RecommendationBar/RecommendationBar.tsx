@@ -11,7 +11,8 @@ function RecommendationBar(props) {
   const userTier = userInfo === null ? 0 : userInfo.tier;
   const preprocess = (data: Product[]) => {
     return data.map((v) => {
-      const { id, name, type, brand, imageUrl, popularity, prices } = v;
+      const { id, name, type, brand, imageUrl, popularity, prices, feature } =
+        v;
       const price = prices[userTier].price;
       return {
         id,
@@ -22,6 +23,7 @@ function RecommendationBar(props) {
         popularity,
         price,
         originalPrice: userTier !== 0 ? prices[0].price : undefined,
+        feature,
       };
     });
   };

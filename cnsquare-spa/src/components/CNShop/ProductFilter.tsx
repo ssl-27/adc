@@ -4,10 +4,16 @@ import {
   AccordionSummary,
   Box,
   Checkbox,
+  FormControl,
   FormControlLabel,
   FormGroup,
+  InputLabel,
+  MenuItem,
   Rating,
+  Select,
+  SelectChangeEvent,
   Slider,
+  TextField,
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -35,6 +41,8 @@ function ProductFilter(props) {
     false,
     false,
   ]);
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [sortOption, setSortOption] = useState<number>(0);
   const updatePriceRange = (event, newValue: number | number[]) => {
     setPriceRange(newValue as number[]);
   };
@@ -118,11 +126,84 @@ function ProductFilter(props) {
             (v.type === "paper_products" && categoryChecked[2]) ||
             (v.type === "desk_accessories" && categoryChecked[3])
         );
-    // TODO: add more filters
-    setPreviewInfo(categoryFiltered);
-  }, [priceRange, ratingChecked, sizeChecked, categoryChecked]);
+    const searchFiltered =
+      searchValue === ""
+        ? categoryFiltered
+        : categoryFiltered.filter((v) =>
+            v.name.toLowerCase().includes(searchValue.toLowerCase())
+          );
+    const sorted = searchFiltered.sort((a, b) => {
+      switch (sortOption) {
+        case 0:
+          if (a.name < b.name) {
+            return -1;
+          } else if (a.name > b.name) {
+            return 1;
+          }
+          break;
+        case 1:
+          if (a.price < b.price) {
+            return -1;
+          } else if (a.price > b.price) {
+            return 1;
+          }
+          break;
+        case 2:
+          if (a.feature === "new" && b.feature !== "new") {
+            return -1;
+          } else if (a.feature !== "new" && b.feature === "new") {
+            return 1;
+          }
+          break;
+        case 3:
+          if (a.feature === "hot" && b.feature !== "hot") {
+            return -1;
+          } else if (a.feature !== "hot" && b.feature === "hot") {
+            return 1;
+          }
+          break;
+      }
+      return 0;
+    });
+    setPreviewInfo(searchFiltered);
+  }, [
+    priceRange,
+    ratingChecked,
+    sizeChecked,
+    categoryChecked,
+    searchValue,
+    sortOption,
+  ]);
   return (
-    <Box sx={{ width: "250px", display: "inline-block" }}>
+    <Box sx={{ maxWidth: "250px", display: "inline-block" }}>
+      <Box margin={"5px"}>
+        <FormControl fullWidth size="small">
+          <InputLabel>Sort By</InputLabel>
+          <Select
+            value={sortOption.toString()}
+            label="Sort By"
+            onChange={(event: SelectChangeEvent) => {
+              setSortOption(parseInt(event.target.value));
+            }}
+          >
+            <MenuItem value={0}>A - Z</MenuItem>
+            <MenuItem value={1}>Low - High Price</MenuItem>
+            <MenuItem value={2}>Newest</MenuItem>
+            <MenuItem value={3}>Hot</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
+      <Box margin={"5px"}>
+        <TextField
+          label="Search Product"
+          variant="filled"
+          value={searchValue}
+          fullWidth
+          onInput={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setSearchValue(event.target.value)
+          }
+        />
+      </Box>
       <Accordion>
         <AccordionSummary>
           <Typography>Category</Typography>
