@@ -10,13 +10,20 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LinkButton from "../LinkButton";
 import MenuDropdown from "./MenuDropdown";
 import { UserContext } from "../../contexts/UserContext";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import MemberInfo from "./MemberInfo";
 import { useNavigate } from "react-router-dom";
 
 function CNAppBar() {
   const { user, cart } = useContext(UserContext);
-
+  const [quantity, setQuantity] = useState<number>(0);
+  useEffect(() => {
+    setQuantity(
+      cart === null
+        ? 0
+        : cart.reduce<number>((prev, curr) => prev + Number(curr.quantity), 0)
+    );
+  }, [cart]);
   const navigate = useNavigate();
 
   const AccountButton =
@@ -46,10 +53,7 @@ function CNAppBar() {
         </Box>
         <Box sx={{ display: "flex" }}>
           {AccountButton}
-          <Badge
-            badgeContent={cart === null ? 0 : cart.length}
-            color={"secondary"}
-          >
+          <Badge badgeContent={quantity} color={"secondary"}>
             <IconButton color="inherit" onClick={(e) => handleNavCart(e)}>
               <ShoppingCartIcon />
             </IconButton>

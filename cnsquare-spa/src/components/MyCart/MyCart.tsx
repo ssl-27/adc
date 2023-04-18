@@ -73,7 +73,7 @@ function MyCart() {
     setSubTotal(
       cart.reduce<number>((prev, curr) => prev + curr.price * curr.quantity, 0)
     );
-    if (userInfo?.tier !== 0) {
+    if (userInfo !== null && userInfo?.tier !== 0) {
       setOriginalTotal(
         cart.reduce<number>(
           (prev, curr) =>
@@ -127,7 +127,7 @@ function MyCart() {
               <Grid item xs={12}>
                 <Divider sx={{ mb: "5px" }} />
               </Grid>
-              {userInfo?.tier !== 0 && cart.length > 0 && (
+              {userInfo && userInfo?.tier !== 0 && cart.length > 0 && (
                 <>
                   <Grid item xs={6}>
                     <Typography>Original Total</Typography>
