@@ -165,7 +165,7 @@ function ProductFilter(props) {
       }
       return 0;
     });
-    setPreviewInfo(searchFiltered);
+    setPreviewInfo(sorted);
   }, [
     priceRange,
     ratingChecked,

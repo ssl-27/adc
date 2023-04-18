@@ -17,7 +17,7 @@ export default function PaymentForm(props) {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Payment method
+        Credit Card Information
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>

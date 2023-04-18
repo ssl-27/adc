@@ -23,33 +23,36 @@ function ProductInfo(props) {
   const updateCount = (event) => {
     setQuantity(event.target.value);
   };
-  const updateCart = useCallback((event) => {
-    const tier = userInfo === null ? 0 : userInfo.tier;
-    const cartItem: CartItem = {
-      id: id,
-      name: name,
-      imageUrl: imageUrl,
-      price: prices[tier].price,
-      quantity: quantity,
-      originalPrice: tier !== 0 ? prices[0].price : undefined,
-      brand: brand,
-    };
-    const storedCart = JSON.parse(
-      window.localStorage.getItem("cart") as string
-    ) as CartItem[] | null;
-    if (storedCart !== null) {
-      const index = storedCart.findIndex((value) => value.id === cartItem.id);
-      if (index !== -1) {
-        storedCart[index] = cartItem;
+  const updateCart = useCallback(
+    (event) => {
+      const tier = userInfo === null ? 0 : userInfo.tier;
+      const cartItem: CartItem = {
+        id: id,
+        name: name,
+        imageUrl: imageUrl,
+        price: prices[tier].price,
+        quantity: quantity,
+        originalPrice: tier !== 0 ? prices[0].price : undefined,
+        brand: brand,
+      };
+      const storedCart = JSON.parse(
+        window.localStorage.getItem("cart") as string
+      ) as CartItem[] | null;
+      if (storedCart !== null) {
+        const index = storedCart.findIndex((value) => value.id === cartItem.id);
+        if (index !== -1) {
+          storedCart[index] = cartItem;
+        } else {
+          storedCart.push(cartItem);
+        }
+        window.localStorage.setItem("cart", JSON.stringify(storedCart));
       } else {
-        storedCart.push(cartItem);
+        window.localStorage.setItem("cart", JSON.stringify([cartItem]));
       }
-      window.localStorage.setItem("cart", JSON.stringify(storedCart));
-    } else {
-      window.localStorage.setItem("cart", JSON.stringify([cartItem]));
-    }
-    syncInfo();
-  }, []);
+      syncInfo();
+    },
+    [quantity]
+  );
   return (
     <Card>
       <CardContent>

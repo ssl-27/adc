@@ -36,23 +36,29 @@ function MyCart() {
       setCart(storedCart);
     }
   }, []);
-  const removeCartItemByIndex = useCallback((id: number) => {
-    const newCart = cart.filter((v) => v.id !== id);
-    window.localStorage.setItem("cart", JSON.stringify(newCart));
-    setCart(newCart);
-    syncInfo();
-  }, []);
-  const updateQuantity = useCallback((id: number, quantity: number) => {
-    // Need to create new array to fire the useEffect after setCart
-    const i = cart.findIndex((v) => v.id === id);
-    const newCart = cart.filter((v) => v.id !== id);
-    const cartItem = cart.find((v) => v.id === id) as CartItem;
-    cartItem.quantity = quantity;
-    newCart.splice(i, 0, cartItem);
-    window.localStorage.setItem("cart", JSON.stringify(newCart));
-    setCart(newCart);
-    syncInfo();
-  }, []);
+  const removeCartItemByIndex = useCallback(
+    (id: number) => {
+      const newCart = cart.filter((v) => v.id !== id);
+      window.localStorage.setItem("cart", JSON.stringify(newCart));
+      setCart(newCart);
+      syncInfo();
+    },
+    [cart]
+  );
+  const updateQuantity = useCallback(
+    (id: number, quantity: number) => {
+      // Need to create new array to fire the useEffect after setCart
+      const i = cart.findIndex((v) => v.id === id);
+      const newCart = cart.filter((v) => v.id !== id);
+      const cartItem = cart.find((v) => v.id === id) as CartItem;
+      cartItem.quantity = quantity;
+      newCart.splice(i, 0, cartItem);
+      window.localStorage.setItem("cart", JSON.stringify(newCart));
+      setCart(newCart);
+      syncInfo();
+    },
+    [cart]
+  );
   useEffect(() => {
     setCartComponents(
       cart.map((v) => (

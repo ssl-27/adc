@@ -16,6 +16,7 @@ import { UserContext } from "../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 import cnAxios from "../../utils/cn-axios";
 import LinkButton from "../LinkButton";
+import PaymentMethod from "./PaymentMethod";
 
 function Copyright(props: any) {
   return (
@@ -30,16 +31,26 @@ function Copyright(props: any) {
   );
 }
 
-const steps = ["Shipping address", "Payment details", "Review your order"];
+const steps = [
+  "Payment method",
+  "Shipping address",
+  "Payment details",
+  "Review your order",
+];
 
-function getStepContent(step: number, userData: User) {
+function getStepContent(step: number, userData: User, pointsUsedState) {
+  const { pointsUsed, setPointsUsed } = pointsUsedState;
   switch (step) {
     case 0:
-      return <AddressForm info={userData} />;
+      return (
+        <PaymentMethod pointsUsed={pointsUsed} setPointsUsed={setPointsUsed} />
+      );
     case 1:
-      return <PaymentForm info={userData} />;
+      return <AddressForm info={userData} />;
     case 2:
-      return <Review info={userData} />;
+      return <PaymentForm info={userData} />;
+    case 3:
+      return <Review pointsUsed={pointsUsed} info={userData} />;
     default:
       throw new Error("Unknown step");
   }
@@ -50,6 +61,7 @@ const theme = createTheme();
 function Checkout() {
   const navigate = useNavigate();
   const { user, userInfo, syncInfo } = useContext(UserContext);
+  const [pointsUsed, setPointsUsed] = useState<number>(0);
   const cart = JSON.parse(
     window.localStorage.getItem("cart") as string
   ) as any[];
@@ -75,7 +87,7 @@ function Checkout() {
 
   // create new order
   useEffect(() => {
-    if (activeStep == 3) {
+    if (activeStep == 4) {
       const items = cart.map((v) => {
         return {
           productId: parseInt(v.id),
@@ -86,10 +98,13 @@ function Checkout() {
         cart.reduce<number>(
           (prev, curr) => prev + curr.price * curr.quantity,
           0
-        ) + (userInfo?.points as number);
+        ) +
+        (userInfo?.points as number) -
+        pointsUsed -
+        pointsUsed / 10;
       const userPayload = {
         userId: parseInt(user.id as string),
-        points: newPoints,
+        points: Math.floor(newPoints),
         tier: newPoints > 1000 && userInfo?.tier === 0 ? 2 : userInfo?.tier,
       };
       const orderPayload = {
@@ -145,7 +160,10 @@ function Checkout() {
             </Fragment>
           ) : (
             <Fragment>
-              {getStepContent(activeStep, userInfo as User)}
+              {getStepContent(activeStep, userInfo as User, {
+                pointsUsed,
+                setPointsUsed,
+              })}
               <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                 {activeStep !== 0 && (
                   <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
