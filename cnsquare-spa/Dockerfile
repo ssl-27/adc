@@ -14,15 +14,12 @@ ENV VITE_API_URL=https://cnsquare-api.herokuapp.com/
 
 RUN yarn build
 
-FROM nginx:stable-alpine
+FROM node:lts-alpine
 
-WORKDIR /usr/share/nginx/html
+WORKDIR /app
 
-RUN rm -rf ./*
 COPY --from=builder /app/dist .
 
-WORKDIR /etc/nginx/conf.d/
+RUN npm install -g serve
 
-COPY --from=builder /app/.nginx/nginx.conf.template nginx.conf.template
-
-CMD envsubst < nginx.conf.template > default.conf && nginx -g 'daemon off;'
+ENTRYPOINT ["/bin/sh", "-c", "serve -s -p $PORT"]

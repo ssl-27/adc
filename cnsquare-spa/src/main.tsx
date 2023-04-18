@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createHashRouter } from "react-router-dom";
 import Root from "./components/Root";
 import CNShop from "./components/CNShop";
 import MyCart from "./components/MyCart";
@@ -14,7 +14,7 @@ import Checkout from "./components/Checkout";
 import Profile from "./components/Profile";
 // import Orders from "./components/Orders";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <Root />,
