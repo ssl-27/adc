@@ -1,16 +1,17 @@
-import Button from "@mui/material/Button";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
-import Grow from "@mui/material/Grow";
-import Paper from "@mui/material/Paper";
-import Popper from "@mui/material/Popper";
-import MenuItem from "@mui/material/MenuItem";
-import MenuList from "@mui/material/MenuList";
-import Stack from "@mui/material/Stack";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SyntheticEvent, useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
-import { useNavigate } from "react-router-dom";
-import { Avatar } from "@mui/material";
+import {
+  Avatar,
+  Button,
+  ClickAwayListener,
+  Grow,
+  MenuItem,
+  MenuList,
+  Paper,
+  Popper,
+  Stack,
+} from "@mui/material";
 
 export default function MenuDropdown() {
   const [open, setOpen] = useState(false);

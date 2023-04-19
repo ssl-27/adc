@@ -9,13 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import ProductCartCard from "./ProductCartCard";
-import {
-  ReactElement,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { ReactElement, useContext, useEffect, useState } from "react";
 import LinkButton from "../LinkButton";
 import { UserContext } from "../../contexts/UserContext";
 import RecommendationBar from "../RecommendationBar";
@@ -26,7 +20,7 @@ function MyCart() {
   const [originalTotal, setOriginalTotal] = useState<number>(0);
   const [discount, setDiscount] = useState<number>(0);
   const [subTotal, setSubTotal] = useState<number>(0);
-  const { userInfo, syncInfo } = useContext(UserContext);
+  const { userInfo, setCartInfo } = useContext(UserContext);
   // check localstorage and update cart
   useEffect(() => {
     const storedCart = JSON.parse(
@@ -36,29 +30,26 @@ function MyCart() {
       setCart(storedCart);
     }
   }, []);
-  const removeCartItemByIndex = useCallback(
-    (id: number) => {
-      const newCart = cart.filter((v) => v.id !== id);
-      window.localStorage.setItem("cart", JSON.stringify(newCart));
-      setCart(newCart);
-      syncInfo();
-    },
-    [cart]
-  );
-  const updateQuantity = useCallback(
-    (id: number, quantity: number) => {
-      // Need to create new array to fire the useEffect after setCart
-      const i = cart.findIndex((v) => v.id === id);
-      const newCart = cart.filter((v) => v.id !== id);
-      const cartItem = cart.find((v) => v.id === id) as CartItem;
-      cartItem.quantity = quantity;
-      newCart.splice(i, 0, cartItem);
-      window.localStorage.setItem("cart", JSON.stringify(newCart));
-      setCart(newCart);
-      syncInfo();
-    },
-    [cart]
-  );
+  useEffect(() => {
+    setCartInfo(cart);
+  }, [cart]);
+  const removeCartItemByIndex = (id: number) => {
+    const newCart = cart.filter((v) => v.id !== id);
+    window.localStorage.setItem("cart", JSON.stringify(newCart));
+    setCart(newCart);
+    setCartInfo(newCart);
+  };
+  const updateQuantity = (id: number, quantity: number) => {
+    // Need to create new array to fire the useEffect after setCart
+    const i = cart.findIndex((v) => v.id === id);
+    const newCart = cart.filter((v) => v.id !== id);
+    const cartItem = cart.find((v) => v.id === id) as CartItem;
+    cartItem.quantity = quantity;
+    newCart.splice(i, 0, cartItem);
+    window.localStorage.setItem("cart", JSON.stringify(newCart));
+    setCart(newCart);
+    setCartInfo(newCart);
+  };
   useEffect(() => {
     setCartComponents(
       cart.map((v) => (

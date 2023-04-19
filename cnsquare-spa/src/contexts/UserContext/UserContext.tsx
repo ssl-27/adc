@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import cnAxios from "../../utils/cn-axios";
 
 const UserContext = createContext<TUserContext>({
@@ -7,71 +7,68 @@ const UserContext = createContext<TUserContext>({
   cart: null,
   updateUser: () => {},
   removeUser: () => {},
-  syncInfo: () => {},
+  setUserInfo: () => {},
+  setCartInfo: () => {},
 });
 
 function UserContextProvider(props) {
-  const userId = window.localStorage.getItem("userId");
-  const accessToken = window.localStorage.getItem("token");
-  const userInfo = JSON.parse(
-    window.localStorage.getItem("userInfo") as string
+  const [user, setUser] = useState<TUserContext>({
+    user: { id: null, accessToken: null },
+    userInfo: null,
+    cart: null,
+    updateUser: () => {},
+    removeUser: () => {},
+    setUserInfo: () => {},
+    setCartInfo: () => {},
+  });
+  const [userId, setUserId] = useState<string | null>(
+    window.localStorage.getItem("userId")
   );
-  const cart = JSON.parse(window.localStorage.getItem("cart") as string);
+  const [accessToken, setAccessToken] = useState<string | null>(
+    window.localStorage.getItem("token")
+  );
+  const [userInfo, setUserInfo] = useState<User | null>(null);
+  const [cart, setCart] = useState<CartItem[] | null>(
+    JSON.parse(window.localStorage.getItem("cart") as string)
+  );
 
   const updateUser = (u: UserLoginInfo) => {
-    if (u.id !== null) {
-      cnAxios.get(`/users/${u.id}`).then((res) => {
-        setUser({ ...user, user: u, userInfo: res.data });
-        window.localStorage.setItem("userInfo", JSON.stringify(res.data));
-      });
-    } else {
-      setUser({ ...user, user: u });
-    }
+    setUserId(u.id);
+    setAccessToken(u.accessToken);
     window.localStorage.setItem("userId", u.id as string);
     window.localStorage.setItem("token", u.accessToken as string);
   };
 
   const removeUser = () => {
-    setUser({
-      ...user,
-      user: { id: null, accessToken: null },
-      userInfo: null,
-    });
+    setUserId(null);
+    setAccessToken(null);
     window.localStorage.removeItem("userId");
     window.localStorage.removeItem("token");
-    window.localStorage.removeItem("userInfo");
   };
 
-  const syncInfo = () => {
+  const setCartInfo = (c: CartItem[] | null) => {
+    setCart(c);
+  };
+
+  useEffect(() => {
     if (userId !== null) {
-      cnAxios.get(`/users/${userId}`).then((res) => {
-        setUser({
-          ...user,
-          user: {
-            id: window.localStorage.getItem("userId"),
-            accessToken: window.localStorage.getItem("token"),
-          },
-          userInfo: res.data,
-          cart: JSON.parse(window.localStorage.getItem("cart") as string),
-        });
-        window.localStorage.setItem("userInfo", JSON.stringify(res.data));
-      });
+      cnAxios.get(`/users/${userId}`).then((res) => setUserInfo(res.data));
     } else {
-      setUser({
-        ...user,
-        cart: JSON.parse(window.localStorage.getItem("cart") as string),
-      });
+      setUserInfo(null);
     }
-  };
+  }, [userId]);
 
-  const [user, setUser] = useState<TUserContext>({
-    user: { id: userId, accessToken: accessToken },
-    userInfo,
-    cart,
-    updateUser,
-    removeUser,
-    syncInfo,
-  });
+  useEffect(() => {
+    setUser({
+      user: { id: userId, accessToken: accessToken },
+      userInfo,
+      cart,
+      updateUser,
+      removeUser,
+      setUserInfo,
+      setCartInfo,
+    });
+  }, [userId, accessToken, cart, userInfo]);
 
   return (
     <UserContext.Provider value={user}>{props.children}</UserContext.Provider>

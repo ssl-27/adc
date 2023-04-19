@@ -1,13 +1,4 @@
 import { useContext, useEffect, useState, Fragment } from "react";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Paper from "@mui/material/Paper";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AddressForm from "./AddressForm";
 import PaymentForm from "./PaymentForm";
@@ -17,6 +8,17 @@ import { useNavigate } from "react-router-dom";
 import cnAxios from "../../utils/cn-axios";
 import LinkButton from "../LinkButton";
 import PaymentMethod from "./PaymentMethod";
+import {
+  Typography,
+  CssBaseline,
+  Container,
+  Paper,
+  Stepper,
+  Step,
+  StepLabel,
+  Box,
+  Button,
+} from "@mui/material";
 
 function Copyright(props: any) {
   return (
@@ -60,7 +62,7 @@ const theme = createTheme();
 
 function Checkout() {
   const navigate = useNavigate();
-  const { user, userInfo, syncInfo } = useContext(UserContext);
+  const { user, userInfo, setCartInfo, setUserInfo } = useContext(UserContext);
   const [pointsUsed, setPointsUsed] = useState<number>(0);
   const cart = JSON.parse(
     window.localStorage.getItem("cart") as string
@@ -115,8 +117,9 @@ function Checkout() {
       };
       cnAxios.post("/orders", orderPayload).then(() => {
         window.localStorage.setItem("cart", JSON.stringify([]));
-        cnAxios.patch(`/users/${user.id}`, userPayload).then(() => {
-          syncInfo();
+        cnAxios.patch(`/users/${user.id}`, userPayload).then((res) => {
+          setCartInfo([]);
+          setUserInfo(res.data);
         });
       });
     }

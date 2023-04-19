@@ -18,11 +18,10 @@ function CNAppBar() {
   const { user, cart } = useContext(UserContext);
   const [quantity, setQuantity] = useState<number>(0);
   useEffect(() => {
-    const c = JSON.parse(window.localStorage.getItem("cart") as string) as any[];
     setQuantity(
-      c === null
+      cart === null
         ? 0
-        : c.reduce<number>((prev, curr) => prev + Number(curr.quantity), 0)
+        : cart.reduce<number>((prev, curr) => prev + Number(curr.quantity), 0)
     );
   }, [cart]);
   const navigate = useNavigate();

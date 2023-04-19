@@ -37,7 +37,7 @@ function Profile() {
   const [tier, setTier] = useState(0);
   const [points, setPoints] = useState(0);
 
-  const { user, syncInfo } = useContext(UserContext);
+  const { user, userInfo, setUserInfo } = useContext(UserContext);
 
   useEffect(() => {
     getUserObject();
@@ -103,7 +103,7 @@ function Profile() {
       .then((res) => {
         setShouldShowSuccessAlert(true);
         setShouldShowErrorAlert(false);
-        syncInfo();
+        setUserInfo(res.data);
       })
       .catch((err) => {
         setShouldShowSuccessAlert(false);
@@ -166,7 +166,7 @@ function Profile() {
             }}
           />
         </Box>
-        {points < 1000 ? (
+        {userInfo && userInfo.tier !== 2 && points < 1000 ? (
           <div>
             <LinearProgress
               variant="determinate"
