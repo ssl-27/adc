@@ -1,12 +1,13 @@
 import { Box, Breadcrumbs, Container, Link, Typography } from "@mui/material";
 import Catalogue from "./Catalogue";
 import ProductFilter from "./ProductFilter";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 
 function CNShop() {
   const data = useLoaderData() as Product[];
+  const navigate = useNavigate();
   const { userInfo } = useContext(UserContext);
   const userTier = userInfo === null ? 0 : userInfo.tier;
   const preprocess = (data: Product[]) => {
@@ -42,7 +43,14 @@ function CNShop() {
   return (
     <Container maxWidth="xl">
       <Breadcrumbs>
-        <Link underline="hover" color="inherit" href="/">
+        <Link
+          underline="hover"
+          color="inherit"
+          onClick={() => {
+            navigate("/");
+          }}
+          sx={{ cursor: "pointer" }}
+        >
           Home
         </Link>
         <Typography color="text.primary">Shop</Typography>
