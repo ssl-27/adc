@@ -12,9 +12,9 @@ import SignUp from "./components/SignUp";
 import { UserContextProvider } from "./contexts/UserContext";
 import Checkout from "./components/Checkout";
 import Profile from "./components/Profile";
+import Orders from "./components/Orders";
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
-// import Orders from "./components/Orders";
 
 const router = createHashRouter([
   {
@@ -45,10 +45,10 @@ const router = createHashRouter([
         path: "profile",
         element: <Profile />,
       },
-      // {
-      //   path: "orders",
-      //   element: <Orders />,
-      // },
+      {
+        path: "orders",
+        element: <Orders />,
+      },
       {
         path: "product/:id",
         element: <ProductDetail />,
