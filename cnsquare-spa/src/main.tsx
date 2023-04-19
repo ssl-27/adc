@@ -12,6 +12,8 @@ import SignUp from "./components/SignUp";
 import { UserContextProvider } from "./contexts/UserContext";
 import Checkout from "./components/Checkout";
 import Profile from "./components/Profile";
+import { createTheme } from "@mui/material";
+import { ThemeProvider } from "@emotion/react";
 // import Orders from "./components/Orders";
 
 const router = createHashRouter([
@@ -66,10 +68,24 @@ const router = createHashRouter([
   },
 ]);
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#4ebd88",
+      contrastText: "#FFFFFF",
+    },
+    secondary: {
+      main: "#bd4e83",
+    },
+  },
+});
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <UserContextProvider>
-      <RouterProvider router={router} />
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </UserContextProvider>
   </React.StrictMode>
 );

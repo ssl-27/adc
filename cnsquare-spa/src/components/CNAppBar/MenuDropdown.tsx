@@ -55,11 +55,13 @@ export default function MenuDropdown() {
     prevOpen.current = open;
   }, [open]);
 
-  const { removeUser } = useContext(UserContext);
+  const { removeUser, setCartInfo } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     removeUser();
+    window.localStorage.removeItem("cart");
+    setCartInfo(null);
     navigate("/");
   };
 

@@ -26,7 +26,11 @@ function ProductCartCard(props) {
               HK${originalPrice}
             </Typography>
           )}
-          <Typography>{`HK$${price}`}</Typography>
+          {originalPrice !== undefined ? (
+            <Typography sx={{ color: "#FF0000" }}>HK${price}</Typography>
+          ) : (
+            <Typography>HK${price}</Typography>
+          )}
         </Box>
         <Box>
           <TextField

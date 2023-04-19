@@ -42,7 +42,7 @@ function CNAppBar() {
   };
 
   return (
-    <AppBar>
+    <AppBar color={"primary"}>
       <Toolbar>
         <Typography sx={{ mr: 1, display: { xs: "none", md: "flex" } }}>
           CN-Square
