@@ -111,6 +111,7 @@ function Checkout() {
         items: items,
         parcelLocation: ["22.3448", "114.0747"],
         status: 0,
+        createdAt: new Date().toISOString(),
       };
       cnAxios.post("/orders", orderPayload).then((r) => {
         setOrderId(r.data.id);

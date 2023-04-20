@@ -225,8 +225,8 @@ function OrderCard(props: any) {
                         </TableCell>
                         <TableCell align="right">{row.quantity}</TableCell>
                         <TableCell align="right">
-                          {products?.find((o: any) => o.id == row.productId)
-                            ?.prices[userInfo?.tier ?? 0]?.price * row.quantity}
+                          {(products?.find((o: any) => o.id == row.productId)
+                            ?.prices[userInfo?.tier ?? 0]?.price * row.quantity).toFixed(2)}
                         </TableCell>
                       </TableRow>
                     ))
