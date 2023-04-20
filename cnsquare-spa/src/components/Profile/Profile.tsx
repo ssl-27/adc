@@ -136,6 +136,7 @@ function Profile() {
           Membership Information
         </Typography>{" "}
         <Box sx={{ display: "flex" }}>
+          <Box sx={{ display: "flex", flexDirection: "column" , flexGrow: 1, mr: 3}}>
           <TextField
             margin="normal"
             required
@@ -145,7 +146,6 @@ function Profile() {
             name="tier"
             value={tiers[tier] || ""}
             onChange={(e) => setFirstName(e.target.value)}
-            sx={{ flexBasis: 0, flexGrow: 1, minWidth: 0, mr: 2 }}
             InputProps={{
               readOnly: true,
             }}
@@ -160,11 +160,12 @@ function Profile() {
             name="points"
             value={points || ""}
             onChange={(e) => setLastName(e.target.value)}
-            sx={{ flexBasis: 0, flexGrow: 1, minWidth: 0, ml: 2 }}
             InputProps={{
               readOnly: true,
             }}
           />
+          </Box>
+          <img src="/qrcode.png" alt="qrcode"/>
         </Box>
         {userInfo && userInfo.tier !== 2 && points < 1000 ? (
           <div>
@@ -177,7 +178,7 @@ function Profile() {
           </div>
         ) : (
           ""
-        )}
+        )}       
         <Typography variant="h6" sx={{ mt: 2, mb: 2 }}>
           Personal Information
         </Typography>
