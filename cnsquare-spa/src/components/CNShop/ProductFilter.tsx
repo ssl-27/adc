@@ -20,7 +20,7 @@ import { useEffect, useState } from "react";
 
 function ProductFilter(props) {
   const { info, setPreviewInfo } = props;
-  const [priceRange, setPriceRange] = useState<number[]>([20, 50]);
+  const [priceRange, setPriceRange] = useState<number[]>([0, 100]);
   const [ratingChecked, setRatingChecked] = useState<boolean[]>([
     true,
     false,
