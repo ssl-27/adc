@@ -58,8 +58,8 @@ function ProductInfo(props) {
     <Card>
       <CardContent>
         <Grid container rowGap={2} columnGap={4} justifyContent={"center"}>
-          <Grid xs={12} container justifyContent={"center"}>
-            <img src={imageUrl} loading="lazy" />
+          <Grid xs={12} container justifyContent={"center"} maxHeight={"300px"}>
+            <img src={imageUrl} loading="lazy" height="100%"/>
           </Grid>
           <Grid xs={12}>
             <Typography variant="h4" textAlign={"center"}>
