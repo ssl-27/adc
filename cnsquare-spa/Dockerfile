@@ -10,7 +10,9 @@ RUN yarn
 
 COPY . .
 
-ENV VITE_API_URL=https://cnsquare-api.herokuapp.com/
+# Change to https://cnsquare-api.herokuapp.com/ for production
+
+ENV VITE_API_URL=http://localhost:3000/
 
 RUN yarn build
 
@@ -19,6 +21,10 @@ FROM node:lts-alpine
 WORKDIR /app
 
 COPY --from=builder /app/dist .
+
+ENV PORT=5173
+
+EXPOSE $PORT
 
 RUN npm install -g serve
 

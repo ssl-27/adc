@@ -13,6 +13,7 @@ import { UserContextProvider } from "./contexts/UserContext";
 import Checkout from "./components/Checkout";
 import Profile from "./components/Profile";
 import Orders from "./components/Orders";
+import Home from "./components/Home";
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 
@@ -21,6 +22,10 @@ const router = createHashRouter([
     path: "/",
     element: <Root />,
     children: [
+      {
+        path: "",
+        element: <Home />,
+      },
       {
         path: "shop",
         element: <CNShop />,

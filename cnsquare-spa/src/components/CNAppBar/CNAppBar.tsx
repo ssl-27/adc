@@ -13,6 +13,7 @@ import { UserContext } from "../../contexts/UserContext";
 import { useContext, useEffect, useState } from "react";
 import MemberInfo from "./MemberInfo";
 import { useNavigate } from "react-router-dom";
+import CSS from 'csstype';
 
 function CNAppBar() {
   const { user, cart } = useContext(UserContext);
@@ -41,13 +42,17 @@ function CNAppBar() {
     navigate("/cart");
   };
 
+  const logoStyle: CSS.Properties = {    
+    height: "64px",
+    width: "64px",
+    mixBlendMode: "multiply",
+  }
+
   return (
     <AppBar color={"primary"}>
       <Toolbar>
-        <Typography sx={{ mr: 1, display: { xs: "none", md: "flex" } }}>
-          CN-Square
-        </Typography>
-        <Box sx={{ flexGrow: 1 }}>
+        <img src="/logo.jpg" alt="logo" style={logoStyle}/>
+        <Box sx={{ flexGrow: 1, ml: 3 }}>
           <LinkButton color="inherit" href="/" label="Home" />
           <LinkButton color="inherit" href="/shop" label="Shop" />
         </Box>
