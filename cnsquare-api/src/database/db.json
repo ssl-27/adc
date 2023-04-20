@@ -3,7 +3,7 @@
         {
             "id": 1,
             "name": "Zebra 0.5mm black pen",
-            "description": "",
+            "description": "It is a black pen. It is popular among students.",
             "imageUrl": "pen1.jpg",
             "brand": "Zebra",
             "popularity": 5,
@@ -28,7 +28,7 @@
         {
             "id": 2,
             "name": "SDI Correction Tape 5mm x 6m",
-            "description": "",
+            "description": "The most popular correction tape in Hong Kong. It is 5mm x 6mm long. ",
             "imageUrl": "correction_tape.png",
             "brand": "SDI",
             "popularity": 4,
@@ -53,7 +53,7 @@
         {
             "id": 3,
             "name": "Double A A4 Paper 500 pcs",
-            "description": "",
+            "description": "The box consist of 500 pieces Double A A4 paper.",
             "imageUrl": "a4paper.png",
             "brand": "Double A",
             "popularity": 3,
@@ -103,7 +103,7 @@
         {
             "id": 5,
             "name": "Pentel Correction Fluid Pen",
-            "description": "",
+            "description": "It is a correction fluid pen that helps you to correct your mistakes!",
             "imageUrl": "correction_fluid_pen.png",
             "brand": "Pentel",
             "popularity": 3,
@@ -128,7 +128,7 @@
         {
             "id": 6,
             "name": "3M Masking Tape",
-            "description": "",
+            "description": "It is a 3M Masking Tape. Hope it is useful for you!",
             "imageUrl": "tape.jpg",
             "brand": "3M",
             "popularity": 2,
@@ -153,7 +153,7 @@
         {
             "id": 7,
             "name": "Pilot Mechanical Pencil",
-            "description": "",
+            "description": "It is a Mechanical Pencil to let you write something.",
             "imageUrl": "mechanical_pencil.png",
             "brand": "Pilot",
             "popularity": 5,
@@ -178,7 +178,7 @@
         {
             "id": 8,
             "name": "Chung Hwa Pencil HB 12pcs",
-            "description": "",
+            "description": "Chung Hwa Pencil, Really Essential.",
             "imageUrl": "pencil.jpg",
             "brand": "Chung Hwa",
             "popularity": 5,
@@ -203,7 +203,7 @@
         {
             "id": 9,
             "name": "Zonon Kid's Pencil 20pcs",
-            "description": "",
+            "description": "It is a 20 pieces pencils for your kids to write.",
             "imageUrl": "kids_pencil.jpg",
             "brand": "Zonon",
             "popularity": 3,
@@ -228,7 +228,7 @@
         {
             "id": 10,
             "name": "Staedtler Watercolour Pencils 12 colours",
-            "description": "",
+            "description": "watercolour pencils for you to draw the masterpiece.",
             "imageUrl": "watercolour_pencils.jpg",
             "brand": "Staedtler",
             "popularity": 4,
@@ -253,7 +253,7 @@
         {
             "id": 11,
             "name": "Smartmax Acrylic Ruler 20cm",
-            "description": "",
+            "description": "20 cm Arcylic ruler from Smartmax for you to measure how long is 20cm.",
             "imageUrl": "acrylic_ruler.jpg",
             "brand": "Smartmax",
             "popularity": 4,
@@ -278,7 +278,7 @@
         {
             "id": 12,
             "name": "Endo Keiki Stainless Steel Ruler 30cm",
-            "description": "",
+            "description": "A 30cm Stainless Steel Ruler from Endo Keiki for you to measure how long is 30cm.",
             "imageUrl": "steel_ruler.jpeg",
             "brand": "Endo Keiki",
             "popularity": 3,
@@ -303,7 +303,7 @@
         {
             "id": 13,
             "name": "Muji Acrylic Protractor 180 degree",
-            "description": "",
+            "description": "A 180 degree acrylic protractor from muji. Getting two you will get 360 degrees.",
             "imageUrl": "protractor.webp",
             "brand": "Muji",
             "popularity": 4,
@@ -328,7 +328,7 @@
         {
             "id": 14,
             "name": "Staedtler Compass",
-            "description": "",
+            "description": "A staedtler compass that helps you to find where is North.",
             "imageUrl": "compass.jpeg",
             "brand": "Staedtler",
             "popularity": 3,
@@ -353,7 +353,7 @@
         {
             "id": 15,
             "name": "SDI Professional Cutter",
-            "description": "",
+            "description": "It is a SDI professional cutter to let you cut the things you hate.",
             "imageUrl": "cutter.jpg",
             "brand": "SDI",
             "popularity": 4,
@@ -378,7 +378,7 @@
         {
             "id": 16,
             "name": "Globe Brand Rubber Bands",
-            "description": "",
+            "description": "Rubber Band from Globe Brands but don't know how to sing songs from Rubber Band.",
             "imageUrl": "rubberband.png",
             "brand": "Globe Brand",
             "popularity": 4,
@@ -403,7 +403,7 @@
         {
             "id": 17,
             "name": "Globe Brand Safety Scissors 140mm",
-            "description": "",
+            "description": "A 140mm Safety Scissors from Globe Brand to let you cut.",
             "imageUrl": "safetyscissors.jpg",
             "brand": "Globe Brand",
             "popularity": 3,
@@ -428,7 +428,7 @@
         {
             "id": 18,
             "name": "Pilot Foam Eraser Large",
-            "description": "",
+            "description": "It is a large Foam Eraser from Pilot to let you erase the things u want.",
             "imageUrl": "eraser.png",
             "brand": "Pilot",
             "popularity": 5,
@@ -453,7 +453,7 @@
         {
             "id": 19,
             "name": "Staedtler Eraser",
-            "description": "",
+            "description": "It is a Eraser. You know how to use it.",
             "imageUrl": "eraser2.jpg",
             "brand": "Staedtler",
             "popularity": 5,
@@ -478,7 +478,7 @@
         {
             "id": 20,
             "name": "Pilot Pen Blue Fine",
-            "description": "",
+            "description": "The Ideal Pen for Overachievers: The smooth writing, long-lasting Pilot G2 Premium Gel Ink Pen features a comfortable rubber grip, and is available in ultra fine, extra fine, fine, and bold point",
             "imageUrl": "pen2.jpg",
             "brand": "Pilot",
             "popularity": 5,
@@ -503,7 +503,7 @@
         {
             "id": 21,
             "name": "Zebra Pen 0.5mm",
-            "description": "",
+            "description": "0.5mm fine point gel ink in black ink is perfect for journaling, note taking, studying and more",
             "imageUrl": "pen3.jpg",
             "brand": "Zebra",
             "popularity": 5,
@@ -528,7 +528,7 @@
         {
             "id": 22,
             "name": "Platinum Fountain Pen Gift Box",
-            "description": "",
+            "description": "The new design of the pen core makes it easy to suction even from small ink bottles.",
             "imageUrl": "fountain_pen.jpg",
             "brand": "Platinum",
             "popularity": 3,
@@ -553,7 +553,7 @@
         {
             "id": 23,
             "name": "Stabilo Boss Highlighter Yellow",
-            "description": "",
+            "description": "Durable, chisel tip highlighters can be used to highlight or underline won't fray and fade.",
             "imageUrl": "highlighter.jpg",
             "brand": "Stabilo Boss",
             "popularity": 5,
@@ -578,7 +578,7 @@
         {
             "id": 24,
             "name": "Canary Tailor Scissors",
-            "description": "",
+            "description": "It is sturdy scissors that can cut not only thick fabric and clothes, but also leather, denim, quilt, curtain, mat, dress, ribbon, felt, nylon, vinyl and wallpaper, etc.",
             "imageUrl": "sharp_scissors.jpg",
             "brand": "Canary",
             "popularity": 3,
@@ -603,7 +603,7 @@
         {
             "id": 25,
             "name": "Gambol Notebook A5 80 pages",
-            "description": "",
+            "description": "Paper: color of all paper is beige, thickened paper, 80 gsm paper, 80 sheets/160pages, can write on both sides, no inking to other side",
             "imageUrl": "notebook.jpg",
             "brand": "Gambol",
             "popularity": 5,
@@ -628,7 +628,7 @@
         {
             "id": 26,
             "name": "Muji Pencil Bag",
-            "description": "",
+            "description": "Made from sturdy canvas fabric.",
             "imageUrl": "pencilbag.jpg",
             "brand": "Muji",
             "popularity": 4,
@@ -653,7 +653,7 @@
         {
             "id": 27,
             "name": "Pilot Liquid Glue",
-            "description": "",
+            "description": "Safe, washable and non-toxic - ideal for children",
             "imageUrl": "liquidglue.jpg",
             "brand": "Pilot",
             "popularity": 2,
@@ -678,7 +678,7 @@
         {
             "id": 28,
             "name": "Elmer's White Glue",
-            "description": "",
+            "description": "Ideal for arts and crafts projects at school or at home",
             "imageUrl": "whiteglue.jpg",
             "brand": "Elmer's",
             "popularity": 3,
@@ -703,7 +703,7 @@
         {
             "id": 29,
             "name": "Casio Scientific Calculator",
-            "description": "",
+            "description": "Converts between Standard form and a Decimal, Review/edit previous entries, Random Number Generator. 2-function Table of values [f(x), g(x)], Statistics and Linear Regression, Integer Division with a Remainder.",
             "imageUrl": "calculator.jpg",
             "brand": "Casio",
             "popularity": 5,
@@ -728,7 +728,7 @@
         {
             "id": 30,
             "name": "Mit Cutting Mat Green",
-            "description": "",
+            "description": "Durable 5-Ply Self Healing Construction. 1/2'' grid with 1/8'' marks for precise alignment as well as 45° and 60° guides.",
             "imageUrl": "cuttingmaat.webp",
             "brand": "Mit",
             "popularity": 4,
@@ -753,7 +753,7 @@
         {
             "id": 31,
             "name": "Texas Instruments Financial Calculator",
-            "description": "",
+            "description": "Profitability calculations: cash flow function Calculates NPV and IRR for uneven cash flows Ideal calculator for students, managers and statisticians.",
             "imageUrl": "financial.webp",
             "brand": "Texas Instruments",
             "popularity": 4,
