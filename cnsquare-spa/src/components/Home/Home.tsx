@@ -23,7 +23,7 @@ function Home() {
         padding: "16px 32px",
         color: "#ffffff",
         fontWeight: "bolder",
-        background: "#bd4e83",
+        background: "#cc0000",
         borderRadius: "32px",
     }
 

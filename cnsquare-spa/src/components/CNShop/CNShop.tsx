@@ -54,17 +54,17 @@ function CNShop() {
           onClick={() => {
             navigate("/");
           }}
-          sx={{ cursor: "pointer" }}
+          sx={{ cursor: "pointer"}}
         >
           Home
         </Link>
         <Typography color="text.primary">Shop</Typography>
       </Breadcrumbs>
       <Box sx={{ display: "flex", alignItems: "flex-start", gap: "30px" }}>
-        <ProductFilter
+        {/* <ProductFilter
           info={unfiltered}
           setPreviewInfo={setPreviewInfo}
-        ></ProductFilter>
+        ></ProductFilter> */}
         <Catalogue info={previewInfo}></Catalogue>
       </Box>
     </Container>

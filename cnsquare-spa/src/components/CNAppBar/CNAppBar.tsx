@@ -44,8 +44,8 @@ function CNAppBar() {
 
   const logoStyle: CSS.Properties = {    
     height: "64px",
-    width: "64px",
-    mixBlendMode: "multiply",
+    //width: "400px",
+    //mixBlendMode: "multiply",
   }
 
   return (
@@ -57,7 +57,7 @@ function CNAppBar() {
           <LinkButton color="inherit" href="/shop" label="Shop" />
         </Box>
         <Box sx={{ display: "flex" }}>
-          {AccountButton}
+          {/* {AccountButton} */}
           <Badge badgeContent={quantity} color={"secondary"}>
             <IconButton color="inherit" onClick={(e) => handleNavCart(e)}>
               <ShoppingCartIcon />
