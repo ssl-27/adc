@@ -76,11 +76,11 @@ const router = createHashRouter([
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#4ebd88",
-      contrastText: "#FFFFFF",
+      main: "#dbc810",
+      contrastText: "#000000",
     },
     secondary: {
-      main: "#bd4e83",
+      main: "#cc0000",
     },
   },
 });

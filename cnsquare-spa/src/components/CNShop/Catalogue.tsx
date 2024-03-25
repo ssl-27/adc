@@ -19,9 +19,9 @@ function Catalogue(props) {
       >
         {productCards}
       </Box>
-      <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
+      {/* <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
         <Pagination count={10} color="primary"></Pagination>
-      </Box>
+      </Box> */}
     </Box>
   );
 }
