@@ -6,4 +6,5 @@ type CartItem = {
   price: number;
   originalPrice: number | undefined;
   brand: string;
+  cost: number;
 };

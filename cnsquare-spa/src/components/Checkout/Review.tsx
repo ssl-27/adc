@@ -28,7 +28,7 @@ export default function Review(props) {
       price: parseFloat(v.price) * v.quantity,
     };
   }) as any[];
-  products.push({ name: "Shipping", price: 0 });
+  //products.push({ name: "Shipping", price: 0 });
   const addresses = [address, district, city];
   const payments = [
     { name: "Card type", detail: "Visa" },
@@ -54,7 +54,7 @@ export default function Review(props) {
             <Typography variant="body2">{`$${product.price}`}</Typography>
           </ListItem>
         ))}
-        <ListItem sx={{ py: 1, px: 0 }}>
+        {/* <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Minus: Cash Dollars" />
           <Typography variant="body2">{`$${pointsUsed / 10}`}</Typography>
         </ListItem>
@@ -63,10 +63,10 @@ export default function Review(props) {
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
             {`$${Math.floor(total)}`}
           </Typography>
-        </ListItem>
+        </ListItem> */}
       </List>
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <Typography variant="h6">Points Gained</Typography>
           <List disablePadding>
             <ListItem sx={{ py: 1, px: 0 }}>
@@ -88,10 +88,10 @@ export default function Review(props) {
               </Typography>
             </ListItem>
           </List>
-        </Grid>
+        </Grid> */}
         {tier !== 2 && (
           <>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               {total + points > 1000 ? (
                 <LinearProgress variant="buffer" value={100} valueBuffer={0} />
               ) : (
@@ -110,15 +110,15 @@ export default function Review(props) {
                   1000 - total - points
                 )} more points to upgrade to VIP!`}</Typography>
               )}
-            </Grid>
+            </Grid> */}
           </>
         )}
-        <Grid item xs={12} sm={6}>
+        {/* <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
             Shipping
           </Typography>
           <Typography gutterBottom>{addresses.join(", ")}</Typography>
-        </Grid>
+        </Grid> */}
         <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
             Payment details

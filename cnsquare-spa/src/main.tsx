@@ -6,7 +6,7 @@ import Root from "./components/Root";
 import CNShop from "./components/CNShop";
 import MyCart from "./components/MyCart";
 import ProductDetail from "./components/ProductDetail";
-import cnAxios from "./utils/cn-axios";
+import adcAxios from "./utils/cn-axios";
 import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 import { UserContextProvider } from "./contexts/UserContext";
@@ -16,6 +16,12 @@ import Orders from "./components/Orders";
 import Home from "./components/Home";
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
+import TableReserve from "./components/TableReserve";
+import ReservationQRCode from "./components/TableReserve/ReservationQRCode";
+import TableStatusPage from "./components/TableAdmin";
+import OrderSummaryPage from "./components/Admin/OrderSummary";
+import AdminDashboardPage from "./components/Admin/AdminDashBoradPage";
+import QRScannerPage from "./components/TableAdmin/SeatingScanner";
 
 const router = createHashRouter([
   {
@@ -30,7 +36,7 @@ const router = createHashRouter([
         path: "shop",
         element: <CNShop />,
         loader: async () => {
-          const response = await cnAxios.get("/products");
+          const response = await adcAxios.get("/products");
           return response.data;
         },
       },
@@ -55,11 +61,36 @@ const router = createHashRouter([
         element: <Orders />,
       },
       {
+        path: "tableReserve",
+        element: <TableReserve />,
+      },
+      {
+        path: "reservationCode",
+        element: <ReservationQRCode />,
+      },      
+      {
+        path: "tableStatus",
+        element:<TableStatusPage />,
+      },
+      {
+        path: "orderStatus",
+        element: <OrderSummaryPage />,
+      },
+      {
+        path: "admin",
+        element: <AdminDashboardPage/>,
+      },
+      {
+        path: "scan-queue-qr-code",
+        element: <QRScannerPage/>,
+      },
+      
+      {
         path: "product/:id",
         element: <ProductDetail />,
         loader: async ({ params }) => {
-          const productResponse = await cnAxios.get(`/products/${params.id}`);
-          const reviewResponse = await cnAxios.get(
+          const productResponse = await adcAxios.get(`/products/${params.id}`);
+          const reviewResponse = await adcAxios.get(
             `/products/${params.id}/reviews`
           );
           return [productResponse.data, reviewResponse.data];

@@ -3,10 +3,11 @@
         {
             "id": 1,
             "name": "Food Item 1",
-            "description": "It is a black pen. It is popular among students.",
+            "description": "Egg sandwich",
             "imageUrl": "pen1.jpg",
             "brand": "Australia Dairy Company",
             "popularity": 5,
+            "cost": 5,
             "prices": [
                 {
                     "tier": 0,
@@ -14,11 +15,11 @@
                 },
                 {
                     "tier": 1,
-                    "price": "13.5"
+                    "price": "15"
                 },
                 {
                     "tier": 2,
-                    "price": "12"
+                    "price": "15"
                 }
             ],
             "type": "writing_tools",
@@ -32,18 +33,19 @@
             "imageUrl": "correction_tape.png",
             "brand": "Australia Dairy Company",
             "popularity": 4,
+            "cost": 5,
             "prices": [
                 {
                     "tier": 0,
-                    "price": "12"
+                    "price": "15"
                 },
                 {
                     "tier": 1,
-                    "price": "8.5"
+                    "price": "15"
                 },
                 {
                     "tier": 2,
-                    "price": "5"
+                    "price": "15"
                 }
             ],
             "type": "writing_tools",
@@ -53,10 +55,11 @@
         {
             "id": 3,
             "name": "Food Item 3",
-            "description": "The box consist of 500 pieces Double A A4 paper.",
+            "description": "Some desert.",
             "imageUrl": "a4paper.png",
             "brand": "Australia Dairy Company",
             "popularity": 3,
+            "cost": 10,
             "prices": [
                 {
                     "tier": 0,
@@ -64,16 +67,77 @@
                 },
                 {
                     "tier": 1,
-                    "price": "32.4"
+                    "price": "36"
                 },
                 {
                     "tier": 2,
-                    "price": "28.8"
+                    "price": "36"
                 }
             ],
             "type": "paper_products",
             "feature": "",
             "size": "medium"
+        }
+    ],
+    "reservation": [
+        {
+            "id": 0,
+            "ticketId": "",
+            "headCount": 0,
+            "userId": "",
+            "arrivalTime": "",
+            "isActive": true,
+            "createdAt": ""
+        }
+    ],
+    "tables": [
+        {
+            "id":0,
+            "tableNumber":1,
+            "seated":false
+        },
+        {
+            "id":1,
+            "tableNumber":2,
+            "seated":false
+        },
+        {
+            "id":2,
+            "tableNumber":3,
+            "seated":false
+        },
+        {
+            "id":3,
+            "tableNumber":4,
+            "seated":false
+        }
+    ],
+    "orders": [
+        {
+          "id": 0,
+          "userId": 21,
+          "items": [
+            {
+              "productId": 25,
+              "quantity": 5
+            },
+            {
+              "productId": 18,
+              "quantity": 3
+            }
+          ],
+          "price": 0,
+          "profit": 0,
+          "orderCompleted": false,
+          "table":1,
+          "orderId":"",
+          "ticketId": "",
+          "parcelLocation": [
+            "22.2999",
+            "114.1996"
+          ],
+          "status": 0,
+          "createdAt": "2023-07-19T19:56:44.923Z"
         }
     ]
 }

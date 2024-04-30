@@ -3,7 +3,7 @@ const faker = require("./faker");
 const db = require("./db.json");
 
 exports.createData = () => {
-  const data = { users: [], orders: [], products: db.products, reviews: [] };
+  const data = { users: [], orders: db.orders, products: db.products, reviews: [], reservation: db.reservation, tables:db.tables };
 
   for (let i = 1; i <= config.NUMBER_OF_USERS; i++) {
     data.users.push(faker.createUser(i));

@@ -54,10 +54,10 @@ function CNAppBar() {
         <img src="/logo.jpg" alt="logo" style={logoStyle}/>
         <Box sx={{ flexGrow: 1, ml: 3 }}>
           <LinkButton color="inherit" href="/" label="Home" />
-          <LinkButton color="inherit" href="/shop" label="Shop" />
+          <LinkButton color="inherit" href="/admin" label=" " />
         </Box>
         <Box sx={{ display: "flex" }}>
-          {/* {AccountButton} */}
+          {AccountButton}
           <Badge badgeContent={quantity} color={"secondary"}>
             <IconButton color="inherit" onClick={(e) => handleNavCart(e)}>
               <ShoppingCartIcon />

@@ -12,7 +12,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import cnAxios from "../../utils/cn-axios";
+import adcAxios from "../../utils/cn-axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Alert } from "@mui/material";
@@ -27,7 +27,7 @@ function Copyright(props: any) {
       align="center"
       {...props}
     >
-      {"Copyright © CN Square " + new Date().getFullYear() + "."}
+      {"Copyright © Australia Dairy Company " + new Date().getFullYear() + "."}
     </Typography>
   );
 }
@@ -82,7 +82,7 @@ export default function SignUp() {
       registeredAt: new Date().toISOString(),
     };
 
-    cnAxios
+    adcAxios
       .post("/signup", payload)
       .then((res) => {
         if (res.data) {

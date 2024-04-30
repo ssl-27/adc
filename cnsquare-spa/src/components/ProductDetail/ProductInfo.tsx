@@ -31,6 +31,7 @@ function ProductInfo(props) {
         name: name,
         imageUrl: imageUrl,
         price: prices[tier].price,
+        cost: 10,
         quantity: quantity,
         originalPrice: tier !== 0 ? prices[0].price : undefined,
         brand: brand,
@@ -71,14 +72,14 @@ function ProductInfo(props) {
               <Typography>Product Info</Typography>
             </Divider>
             <Typography>{description}</Typography>
-            <Divider textAlign={"left"} sx={{ m: "5px" }}>
+            {/* <Divider textAlign={"left"} sx={{ m: "5px" }}>
               <Typography>Return & Refund policy</Typography>
             </Divider>
             <Typography>No refunds.</Typography>
             <Divider textAlign={"left"} sx={{ m: "5px" }}>
               <Typography>Shipping Info</Typography>
             </Divider>
-            <Typography>Free shipping.</Typography>
+            <Typography>Free shipping.</Typography> */}
           </Grid>
           <Grid xs={4}>
             <List subheader={<ListSubheader>Prices</ListSubheader>}>

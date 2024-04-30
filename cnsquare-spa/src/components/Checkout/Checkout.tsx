@@ -1,10 +1,9 @@
 import { useContext, useEffect, useState, Fragment } from "react";
-import AddressForm from "./AddressForm";
 import PaymentForm from "./PaymentForm";
 import Review from "./Review";
 import { UserContext } from "../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
-import cnAxios from "../../utils/cn-axios";
+import adcAxios from "../../utils/cn-axios";
 import LinkButton from "../LinkButton";
 import PaymentMethod from "./PaymentMethod";
 import {
@@ -26,30 +25,29 @@ function Copyright(props: any) {
       align="center"
       {...props}
     >
-      {"Copyright © CN Square " + new Date().getFullYear() + "."}
+      {"Copyright © Australia Dairy Company " + new Date().getFullYear() + "."}
     </Typography>
   );
 }
 
 const steps = [
   "Payment method",
-  "Shipping address",
   "Payment details",
   "Review your order",
 ];
 
-function getStepContent(step: number, userData: User, pointsUsedState) {
+function getStepContent(step: number, userData: User, pointsUsedState: any) {
   const { pointsUsed, setPointsUsed } = pointsUsedState;
   switch (step) {
     case 0:
       return (
         <PaymentMethod pointsUsed={pointsUsed} setPointsUsed={setPointsUsed} />
       );
+    // case 1:
+    //   return <AddressForm info={userData} />;
     case 1:
-      return <AddressForm info={userData} />;
-    case 2:
       return <PaymentForm info={userData} />;
-    case 3:
+    case 2:
       return <Review pointsUsed={pointsUsed} info={userData} />;
     default:
       throw new Error("Unknown step");
@@ -86,7 +84,7 @@ function Checkout() {
 
   // create new order
   useEffect(() => {
-    if (activeStep == 4) {
+    if (activeStep == 3) {
       const items = cart.map((v) => {
         return {
           productId: parseInt(v.id),
@@ -113,10 +111,10 @@ function Checkout() {
         status: 0,
         createdAt: new Date().toISOString(),
       };
-      cnAxios.post("/orders", orderPayload).then((r) => {
+      adcAxios.post("/orders", orderPayload).then((r) => {
         setOrderId(r.data.id);
         window.localStorage.setItem("cart", JSON.stringify([]));
-        cnAxios.patch(`/users/${user.id}`, userPayload).then((res) => {
+        adcAxios.patch(`/users/${user.id}`, userPayload).then((res) => {
           setCartInfo([]);
           setUserInfo(res.data);
         });
@@ -150,9 +148,7 @@ function Checkout() {
               Thank you for your order.
             </Typography>
             <Typography variant="subtitle1">
-              Your order number is #{orderId}. We have emailed your order
-              confirmation, and will send you an update when your order has
-              shipped.
+              Your order number is #{orderId}. 
             </Typography>
             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
               <LinkButton color="primary" href="/" label="home" />

@@ -12,7 +12,7 @@ import {
 import Review from "./Review";
 import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
-import cnAxios from "../../utils/cn-axios";
+import adcAxios from "../../utils/cn-axios";
 function ReviewSection(props) {
   const { reviews, productId } = props;
   const [reviewText, setReviewText] = useState("");
@@ -47,7 +47,7 @@ function ReviewSection(props) {
       rating: reviewScore,
       createdAt: new Date().toISOString(),
     };
-    cnAxios.post("/reviews", payload).then(() => {
+    adcAxios.post("/reviews", payload).then(() => {
       location.reload();
     });
   };
