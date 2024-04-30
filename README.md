@@ -1,4 +1,4 @@
-# CN Square - E-Commerce Platform
+# Australia Dairy Company - E-Commerce Platform
 
 To run the prototype server locally, (1) docker or (2) yarn can be used.
 
