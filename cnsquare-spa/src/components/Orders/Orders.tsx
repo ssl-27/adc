@@ -15,7 +15,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
-import cnAxios from "../../utils/cn-axios";
+import adcAxios from "../../utils/cn-axios";
 import OrderCard from "./OrderCard";
 import { UserContext } from "../../contexts/UserContext";
 
@@ -34,7 +34,7 @@ function Orders() {
   }, []);
 
   const getOrderIds = () => {
-    cnAxios
+    adcAxios
       .get(`/users/${user.id}/orders`)
       .then((res) => {
         const data = res.data;

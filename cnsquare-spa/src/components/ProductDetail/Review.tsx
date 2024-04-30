@@ -1,12 +1,12 @@
 import { Avatar, Grid, Rating, Typography } from "@mui/material";
-import cnAxios from "../../utils/cn-axios";
+import adcAxios from "../../utils/cn-axios";
 import { useEffect, useState } from "react";
 
 function Review(props) {
   const { userId, message, rating, timestamp } = props;
   const [userData, setUserData] = useState(undefined);
   useEffect(() => {
-    const response = cnAxios.get(`/users/${userId}`);
+    const response = adcAxios.get(`/users/${userId}`);
     response.then((res) => {
       setUserData(res.data);
     });

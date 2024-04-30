@@ -49,7 +49,7 @@ function ProductDetail() {
           }}
         >
           <ProductInfo info={productData} />
-          <ReviewSection reviews={reviewData} productId={productData.id} />
+          {/* <ReviewSection reviews={reviewData} productId={productData.id} /> */}
           <RecommendationBar title={"You may also like: "} />
           <RecommendationBar title={"From your wish list: "} />
         </CardContent>

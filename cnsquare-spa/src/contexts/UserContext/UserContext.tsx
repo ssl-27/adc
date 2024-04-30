@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import cnAxios from "../../utils/cn-axios";
+import adcAxios from "../../utils/cn-axios";
 
 const UserContext = createContext<TUserContext>({
   user: { id: null, accessToken: null },
@@ -52,7 +52,7 @@ function UserContextProvider(props) {
 
   useEffect(() => {
     if (userId !== null) {
-      cnAxios.get(`/users/${userId}`).then((res) => setUserInfo(res.data));
+      adcAxios.get(`/users/${userId}`).then((res) => setUserInfo(res.data));
     } else {
       setUserInfo(null);
     }

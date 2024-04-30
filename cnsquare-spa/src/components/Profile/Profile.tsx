@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import { useContext, useEffect, useState } from "react";
-import cnAxios from "../../utils/cn-axios";
+import adcAxios from "../../utils/cn-axios";
 import { UserContext } from "../../contexts/UserContext";
 
 function Profile() {
@@ -44,7 +44,7 @@ function Profile() {
   }, []);
 
   const getUserObject = () => {
-    cnAxios
+    adcAxios
       .get(`/users/${user.id}`)
       .then((res) => {
         const data = res.data;
@@ -98,7 +98,7 @@ function Profile() {
       creditCardCVV,
     };
 
-    cnAxios
+    adcAxios
       .patch(`/users/${user.id}`, payload)
       .then((res) => {
         setShouldShowSuccessAlert(true);

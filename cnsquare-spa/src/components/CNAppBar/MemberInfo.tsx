@@ -11,9 +11,9 @@ export default function MemberInfo() {
     setPoints(userInfo === null ? 0 : userInfo.points);
   }, [userInfo]);
 
-  const tiers = ["CN Square Member", "CN Square Student", "CN Square VIP"];
+  const tiers = ["Welcome", "Welcome", "Welcome"];
 
   return (
-    <Chip color="secondary" label={tiers[tier] + " | " + points + " pts"} />
+    <Chip color="secondary" label={tiers[tier] + ', ' + userInfo?.firstName + "!"} />
   );
 }

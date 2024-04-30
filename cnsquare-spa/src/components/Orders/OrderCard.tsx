@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import ReceiptIcon from "@mui/icons-material/Receipt";
-import cnAxios from "../../utils/cn-axios";
+import adcAxios from "../../utils/cn-axios";
 import StepConnector, {
   stepConnectorClasses,
 } from "@mui/material/StepConnector";
@@ -62,7 +62,7 @@ function OrderCard(props: any) {
   }, []);
 
   const getOrder = () => {
-    cnAxios
+    adcAxios
       .get(`/orders/${props.orderId}`)
       .then((res) => {
         const data = res.data;
@@ -79,7 +79,7 @@ function OrderCard(props: any) {
   };
 
   const getProducts = () => {
-    cnAxios
+    adcAxios
       .get("/products")
       .then((res) => {
         const data = res.data;
@@ -159,10 +159,10 @@ function OrderCard(props: any) {
     );
   }
 
-  const steps = ["Preparing", "Shipping", "Fulfilled"];
+  const steps = ["Preparing",  "Fulfilled"];
 
   //   const rows = items.map(async (item) => {
-  //     const res = await cnAxios.get(`/products/${item.productId}`);
+  //     const res = await adcAxios.get(`/products/${item.productId}`);
   //     console.log(res.data)
   //   })
 

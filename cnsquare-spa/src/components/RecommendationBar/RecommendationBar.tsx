@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import cnAxios from "../../utils/cn-axios";
+import adcAxios from "../../utils/cn-axios";
 import ProductCard from "../CNShop/ProductCard";
 import { UserContext } from "../../contexts/UserContext";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
@@ -29,7 +29,7 @@ function RecommendationBar(props) {
   };
 
   useEffect(() => {
-    cnAxios
+    adcAxios
       .get("products?_limit=5")
       .then((res) => setProducts(preprocess(res.data) as any[]));
   }, []);
